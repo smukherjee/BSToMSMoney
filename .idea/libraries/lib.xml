@@ -1,0 +1,29 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.18-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/resolver.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-examples-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-scratchpad-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.2-bin.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xbean_xpath.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.18-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/opencsv-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/htmlparser.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-bin-4.0.0-20180907.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-excelant-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xbean.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tika-app-1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-schemas-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmlpublic.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-4.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
