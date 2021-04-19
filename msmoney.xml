@@ -3,15 +3,15 @@
 <MSMONEY>
 
     <!-- download as excel file -->
-    <!--<Bank name = "ICICI" filename="OpTransactionHistory20-03-2021" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+    <Bank name = "ICICI" filename="OpTransactionHistory" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
 
-    <!-- <Bank name = "Axis" filename="920010054731208" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+    <Bank name = "Axis" filename="920010054731208" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
 
-    <!--<Bank name = "SBI" filename="1616225882286tILhNJJ3SLyLdd3U" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+    <Bank name = "SBI" filename="16187345127089Q6wSFWML1WWHMKF" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
 
-    <!--<Bank name = "UNITEDBANK" filename="0470XXXXXX208120-03-2021" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+    <Bank name = "UNITEDBANK" filename="0470XXXXXX208118-04-2021" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
 
-    <!--<Bank name = "KOTAK" filename="7811333655_statement (1)" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+    <Bank name = "KOTAK" filename="7811333655_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>
 
     <Bank name="BOI" filename="BOI" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>
 
@@ -20,18 +20,5 @@
     <!--<Bank name = "SYNDICATE" filename="1" filepath="C:\Users\Soham\Downloads" ext="csv"/>-->
     <!--<Bank name = "SYNDICATE" filename="2" filepath="C:\Users\Soham\Downloads" ext="csv"/>-->
 
-    <!--&lt;!&ndash; Save as tab file &ndash;&gt;-->
-    <!--<Bank name = "BOI" filename="FullStatementloan" filepath="C:\Users\Soham\Downloads" ext="txt"/>-->
-    <!--<Bank name = "BOI" filename="FullStatement" filepath="C:\Users\Soham\Downloads" ext="txt"/>-->
-
-    <!--&lt;!&ndash; Save as csv file &ndash;&gt;-->
-    <!--<Bank name = "KOTAK" filename="Report-1" filepath="C:\Users\Soham\Downloads" ext="csv"/>-->
-    <!--<Bank name = "KOTAK" filename="Report-2" filepath="C:\Users\Soham\Downloads" ext="csv"/>-->
-
-    <!--&lt;!&ndash; download as excel file and remove all single quotes&ndash;&gt;-->
-
-
-    <!--&lt;!&ndash; Save as csv file &ndash;&gt;-->
-    <!--&lt;!&ndash;Bank name = "CITIBANK" filename="Savings_Stmt" filepath="/Users/sujoymukherjee/Downloads" ext="xls"/&ndash;&gt;-->
 
 </MSMONEY>
