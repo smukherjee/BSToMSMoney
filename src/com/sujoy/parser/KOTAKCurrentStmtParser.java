@@ -17,16 +17,16 @@ public class KOTAKCurrentStmtParser implements StatementParser {
      * @param line
      * @return
      */
-    private static int dtStart = 6;
-    private static int dtEnd = 16;
-    private static int payeeStart = 16;
-    private static int payeeEnd = 51;
-    private static int amountStart = 67;
-    private static int amountEnd = 75;
-    private static int debitStart = 75;
-    private static int debitEnd = 78;
-    private static int chequeStart = 51;
-    private static int chequeEnd = 65;
+    private static final int dtStart = 6;
+    private static final int dtEnd = 16;
+    private static final int payeeStart = 16;
+    private static final int payeeEnd = 51;
+    private static final int amountStart = 67;
+    private static final int amountEnd = 75;
+    private static final int debitStart = 75;
+    private static final int debitEnd = 78;
+    private static final int chequeStart = 51;
+    private static final int chequeEnd = 65;
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
         writer.write("!Type:Bank");

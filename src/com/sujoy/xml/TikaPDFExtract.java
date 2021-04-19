@@ -13,7 +13,7 @@ import java.io.InputStream;
 
 public class TikaPDFExtract {
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
 
         InputStream is = null;
         try {

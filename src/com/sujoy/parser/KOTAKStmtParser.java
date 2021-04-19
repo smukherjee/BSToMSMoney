@@ -18,7 +18,7 @@ public class KOTAKStmtParser implements StatementParser {
         writer.newLine();
     }
 
-    private static boolean isValidLine(String line[]) {
+    private static boolean isValidLine(String[] line) {
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
         try {
             sdfDate.parse(line[2]);
@@ -36,7 +36,7 @@ public class KOTAKStmtParser implements StatementParser {
      * @throws IOException
      * @throws ParseException
      */
-    private static void parseNWriteLine(String line[], BufferedWriter writer) {
+    private static void parseNWriteLine(String[] line, BufferedWriter writer) {
         try {
             MSMoney msMoneyFormat = new MSMoney();
             msMoneyFormat.setDate(Util.interchangeMonthDate(line[2], "dd/MM/yyyy"));

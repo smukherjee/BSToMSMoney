@@ -18,7 +18,7 @@ public class SYNDICATEStmtParser implements StatementParser {
         writer.newLine();
     }
 
-    private static boolean isValidLine(String line[]) {
+    private static boolean isValidLine(String[] line) {
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MMM-yyyy");
         try {
             sdfDate.parse(line[1]);
@@ -39,7 +39,7 @@ public class SYNDICATEStmtParser implements StatementParser {
      * @throws IOException
      * @throws ParseException
      */
-    private static void parseNWriteLine(String line[], BufferedWriter writer)
+    private static void parseNWriteLine(String[] line, BufferedWriter writer)
             throws IOException, ParseException {
         String amount = line[4].trim();
         System.out.println("Date: [" + line[0] + "]\nDescription: [" + line[3] + "]\nchq: [" + line[2] + "]" + "]\nCredit: [" + line[5] + "]" + "]\nDebit: [" + line[4] + "]");

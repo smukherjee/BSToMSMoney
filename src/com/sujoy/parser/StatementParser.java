@@ -14,7 +14,7 @@ import java.text.ParseException;
  */
 public interface StatementParser {
 
-    public abstract void parse(String path, String filename, String ext)
+    void parse(String path, String filename, String ext)
             throws IOException, ParseException, ParserException;
 
 }

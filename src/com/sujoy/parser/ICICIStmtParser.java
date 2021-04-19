@@ -17,14 +17,14 @@ public class ICICIStmtParser implements StatementParser {
      * @param line
      * @return
      */
-    private static int dtStart = 36;
-    private static int dtEnd = 47;
-    private static int payeeStart = 78;
-    private static int payeeEnd = 108;
-    private static int debitStart = 110;
-    private static int debitEnd = 120;
-    private static int amountStart = 122;
-    private static int amountEnd = 133;
+    private static final int dtStart = 36;
+    private static final int dtEnd = 47;
+    private static final int payeeStart = 78;
+    private static final int payeeEnd = 108;
+    private static final int debitStart = 110;
+    private static final int debitEnd = 120;
+    private static final int amountStart = 122;
+    private static final int amountEnd = 133;
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
         writer.write("!Type:Bank");

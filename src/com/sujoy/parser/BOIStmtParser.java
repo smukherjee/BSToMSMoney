@@ -18,14 +18,14 @@ public class BOIStmtParser implements StatementParser {
      * @return
      */
 
-    private static int dtStart = 24;
-    private static int dtEnd = 35;
-    private static int payeeStart = 55;
-    private static int payeeEnd = 105;
-    private static int debitStart = 107;
-    private static int debitEnd = 110;
-    private static int amountStart = 118;
-    private static int amountEnd = 128;
+    private static final int dtStart = 24;
+    private static final int dtEnd = 35;
+    private static final int payeeStart = 55;
+    private static final int payeeEnd = 105;
+    private static final int debitStart = 107;
+    private static final int debitEnd = 110;
+    private static final int amountStart = 118;
+    private static final int amountEnd = 128;
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
         writer.write("!Type:Bank");
