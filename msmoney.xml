@@ -3,17 +3,18 @@
 <MSMONEY>
 
     <!-- download as excel file -->
-    <Bank name = "ICICI" filename="OpTransactionHistory" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
+<!--    <Bank name = "ICICI" filename="OpTransactionHistory" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-    <Bank name = "Axis" filename="920010054731208" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
+<!--    <Bank name = "Axis" filename="920010054731208" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-    <Bank name = "SBI" filename="16187345127089Q6wSFWML1WWHMKF" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
+<!--    <Bank name = "SBI" filename="162123662348343cSvOnWiqM8JtjP" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-    <Bank name = "UNITEDBANK" filename="0470XXXXXX208118-04-2021" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
+<!--    <Bank name = "UNITEDBANK" filename="0470XXXXXX208117-05-2021" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-    <Bank name = "KOTAK" filename="7811333655_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>
+<!--    <Bank name = "KOTAK" filename="KM12836478_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+    <Bank name = "DIGIBANK" filename="2021-02-01-2021-05-01" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>
 
-    <Bank name="BOI" filename="BOI" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>
+<!--    <Bank name="BOI" filename="BOI" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
 
 
     <!-- Save as csv file -->

@@ -6,34 +6,17 @@ import com.sujoy.common.Util;
 
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  * @author sujoy
  */
-public class KOTAKStmtParser implements StatementParser {
+public class DigiBankStmtParser implements StatementParser {
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
         writer.write("!Type:Bank");
         writer.newLine();
     }
 
-//    private static final String[] formats = {
-//            "dd/MM/yyyy", "dd-MM-yyyy"            };
-//    private static boolean isValidLine(String[] line) {
-//            for(String parse : formats){
-//                SimpleDateFormat sdf = new SimpleDateFormat(parse);
-//                try {
-//                    sdf.parse(line[2]);
-//                    System.out.println(line[2]);
-//                }
-//            catch (ParseException | IndexOutOfBoundsException e) {
-//                System.out.println("Date Exception ------------" + line[2] );
-//            }
-//            return true;
-//        }
-//            return false;
-//    }
 
     /**
      * @param line
@@ -45,19 +28,19 @@ public class KOTAKStmtParser implements StatementParser {
         try {
             MSMoney msMoneyFormat = new MSMoney();
 //            msMoneyFormat.setDate(Util.interchangeMonthDate(line[2], "dd/MM/yyyy"));
-            msMoneyFormat.setDate(Util.parse(line[2]));
-            msMoneyFormat.setPayee(line[3].replaceAll("[=,\"]", ""));
-            msMoneyFormat.setRemarks(line[3].replaceAll("[=,\"]", ""));
-            msMoneyFormat.setChequeNo(line[4].replaceAll("[=,\"]", ""));
+            msMoneyFormat.setDate(Util.parse(line[0]));
+            msMoneyFormat.setPayee(line[1]);
+            msMoneyFormat.setRemarks(line[1]);
 
-            if (line[6].trim().equals("DR")) {
-                msMoneyFormat.setTransactionAmount('-' + line[5].trim());
-            } else {
-                msMoneyFormat.setTransactionAmount(line[5].trim());
+            if(!line[2].trim().equals("")) {
+                msMoneyFormat.setTransactionAmount('-' + line[2].trim());
+            }
+            else {
+                msMoneyFormat.setTransactionAmount(line[3].trim());
             }
             msMoneyFormat.write(writer);
-        } catch (ArrayIndexOutOfBoundsException |  IOException e) {
-            System.out.println("HHHHHHHHHHHHHHH");
+        } catch (ArrayIndexOutOfBoundsException | IOException e) {
+            System.out.println("Error in parsing" + e.getMessage());
             //Do nothing as the line is not a valid line, but has a date??
         }
     }
@@ -83,7 +66,7 @@ public class KOTAKStmtParser implements StatementParser {
 
 
             while ((line = reader.readNext()) != null) {
-                if (Util.isValidLine(line[2])) {
+                if (Util.isValidLine(line[0])) {
                     parseNWriteLine(line, writer);
                 }
             }

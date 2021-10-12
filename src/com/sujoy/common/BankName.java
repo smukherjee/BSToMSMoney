@@ -5,5 +5,5 @@ package com.sujoy.common;
  *
  */
 public enum BankName {
-    ICICI, UNITEDBANK, BOI, KOTAK, SBI, SYNDICATE, Axis
+    ICICI, UNITEDBANK, BOI, KOTAK, SBI, SYNDICATE, Axis,DIGIBANK
 }
