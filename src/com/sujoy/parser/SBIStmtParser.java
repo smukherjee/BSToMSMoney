@@ -20,8 +20,8 @@ public class SBIStmtParser implements StatementParser {
 
     private static boolean isValidLine(String line) {
         if (line != null && line.length() > 20) {
-//			SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MMM-yy"); //Till 2018
-            SimpleDateFormat sdfDate = new SimpleDateFormat("dd MMM yyyy"); //post 2018
+			SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MMM-yy");
+//            SimpleDateFormat sdfDate = new SimpleDateFormat("dd MMM yyyy"); //post 2018
 
             String[] spl = line.split("\\t");
             try {
@@ -30,7 +30,7 @@ public class SBIStmtParser implements StatementParser {
                 System.out.println(spl[0]);
                 return Boolean.TRUE;
             } catch (ParseException e) {
-                System.out.println("Date Exception" + spl[0]);
+                System.out.println("Date Exception " + spl[0]);
 
                 return Boolean.FALSE;
             } catch (Exception e) {
@@ -70,30 +70,22 @@ public class SBIStmtParser implements StatementParser {
             throws IOException, ParseException {
         String[] st = line.split("\\t");
 
-        System.out.println("payee" + st[2]);
-        System.out.println("cheq" + st[3]);
-        System.out.println("dr" + st[4]);
-        System.out.println("cr" + st[5]);
+//        System.out.println("payee" + st[2]);
+//        System.out.println("cheq" + st[3]);
+//        System.out.println("dr" + st[4]);
+//        System.out.println("cr" + st[5]);
 
         MSMoney msMoneyFormat = new MSMoney();
 
-//		msMoneyFormat.setDate(Util.interchangeMonthDate(st[0],"dd-MMM-yy")); // Till 2018
-        msMoneyFormat.setDate(Util.interchangeMonthDate(st[0], "dd MMM yyyy")); //Post 2018
+		msMoneyFormat.setDate(Util.interchangeMonthDate(st[0],"dd-MMM-yy"));
+//        msMoneyFormat.setDate(Util.interchangeMonthDate(st[0], "dd MMM yyyy")); //Post 2018
         msMoneyFormat.setPayee(st[2]);
         msMoneyFormat.setRemarks(st[2]);
-        msMoneyFormat.setChequeNo(st[3]);
-        String str = st[5].replaceAll(",", "").replaceAll("\"", "");
-        System.out.println(str);
-        msMoneyFormat.setTransactionAmount(((st[4].trim()).equals("")) ? str : "-" + st[4].trim());
-////
-//			if (st[4].trim()).equals("")) {
-//				debit = line.substring(amountStart, amountEnd).trim();
-//				msMoneyFormat.setTransactionAmount('-' + debit);
-//			} else {
-//				credit = line.substring(amountStart, amountEnd).trim();
-//				msMoneyFormat.setTransactionAmount(credit);
-//			}
-//		}
+        msMoneyFormat.setChequeNo(st[3].replaceAll("TRANSFER TO ", "").replaceAll("TRANSFER FROM ", "").replaceAll("TRANSFER T", "").trim());
+        String debit = st[4].replaceAll(",", "").replaceAll("\"", "");
+        String credit = st[5].replaceAll(",", "").replaceAll("\"", "");
+        System.out.println(credit);
+        msMoneyFormat.setTransactionAmount(((debit.trim()).equals("")) ? credit : "-" + debit);
         msMoneyFormat.write(writer);
     }
 
