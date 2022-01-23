@@ -83,8 +83,13 @@ public class KOTAKStmtParser implements StatementParser {
 
 
             while ((line = reader.readNext()) != null) {
-                if (Util.isValidLine(line[2])) {
-                    parseNWriteLine(line, writer);
+                try {
+                    if (Util.isValidLine(line[2])) {
+                        parseNWriteLine(line, writer);
+                    }
+                }
+                catch(IndexOutOfBoundsException indexOutOfBoundsException){
+                    //ignore
                 }
             }
         } finally {

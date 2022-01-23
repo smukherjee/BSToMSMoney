@@ -3,6 +3,7 @@ package com.sujoy.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 //import java.util.Date;
 
 /**
@@ -12,13 +13,9 @@ import java.text.SimpleDateFormat;
 public class Util {
 
     /**
-     * change input format type to MM/DD/YYYY format
-     *
-     * @param
-     * @return
-     * @throws ParseException
+     * change input format type to specified formats
      */
-    private static SimpleDateFormat sdfMSMoneyDate = new SimpleDateFormat("MM/dd/yyyy");
+    private static final SimpleDateFormat  sdfMSMoneyDate = new SimpleDateFormat("MM/dd/yyyy");
     public static String interchangeMonthDate(String date, String format)
             throws ParseException {
 
@@ -36,16 +33,23 @@ public class Util {
 //            "MM/dd/yyyy'T'HH:mm:ss.SSSZ", "MM/dd/yyyy'T'HH:mm:ss.SSS",
 //            "MM/dd/yyyy'T'HH:mm:ssZ",     "MM/dd/yyyy'T'HH:mm:ss",
 //            "yyyy:MM:dd HH:mm:ss",        "yyyyMMdd",
-            "dd/MM/yyyy","dd-MM-yyyy","dd-MMM-yy"
+            "dd/MM/yyyy","dd-MM-yyyy","dd-MMM-yy","dd-MMM-yyyy","dd-MMM"
     };
     public static String parse(String d) {
-        SimpleDateFormat sdf = null ;
+        SimpleDateFormat sdf ;
         String finalDate=null;
         if (d != null) {
+
             for (String parseFormat : formats) {
                sdf = new SimpleDateFormat(parseFormat);
                 try {
                     finalDate=sdfMSMoneyDate.format(sdf.parse(d));
+                    if (sdf.parse(d).getYear()==70){ // if the year is not passed then java instantiates it to 1970, then replace
+                        Calendar now = Calendar.getInstance();
+                        int year = now.get(Calendar.YEAR);
+                        String yearInString = String.valueOf(year);
+                        finalDate=finalDate.replace("1970",yearInString);
+                    }
                     System.out.println("Converted Date --- " + finalDate);
                     return finalDate;
                 } catch (ParseException e) {
@@ -61,7 +65,7 @@ public class Util {
     }
 
     public static boolean isValidLine(String d) {
-        SimpleDateFormat sdf = null ;
+        SimpleDateFormat sdf ;
         boolean converted=false;
         if (d != null) {
             for (String parseFormat : formats) {
@@ -82,8 +86,8 @@ public class Util {
         return converted;
     }
 
-    public static void main(String[] args) throws Exception {
-        String yyyyMMdd = "11-Oct-21";
+    public static void main(String[] args)  {
+        String yyyyMMdd = "11-Oct";
         parse(yyyyMMdd);
         System.out.println(isValidLine(yyyyMMdd));
 

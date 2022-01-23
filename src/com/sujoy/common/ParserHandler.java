@@ -34,7 +34,7 @@ public class ParserHandler {
                 return new AxisStmtParserExcel();
             }
             case DIGIBANK: {
-                return new DigiBankStmtParser();
+                return new DigiBankStmtParserExcel();
             }
 
             default:
