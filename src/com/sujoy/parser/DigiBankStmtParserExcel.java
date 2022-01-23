@@ -115,8 +115,7 @@ public class DigiBankStmtParserExcel implements StatementParser {
                 }
 
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

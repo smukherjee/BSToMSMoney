@@ -10,13 +10,13 @@
 <!--    <Bank name = "ICICI" filename="OpTransactionHistory23-01-2022 pkr" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 <!--    <Bank name = "ICICI" filename="OpTransactionHistory23-01-2022 ajantaroy" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-<!--    <Bank name = "SBI" filename="1634048011741MP5xogpz7Big7itI" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+    <Bank name = "SBI" filename="1642947939762A7v25gnL8djpqE7j" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
 
 <!--    <Bank name = "UNITEDBANK" filename="0470XXXXXX208117-05-2021" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 <!--    <Bank name = "KOTAK" filename="KM12836478_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
 <!--    Digibank csv is actually an excel file with different date formats-->
 <!--    <Bank name = "DIGIBANK" filename="2021-10-11-2021-12-31" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
-    <Bank name = "DIGIBANK" filename="2021-10-25-2022-01-23" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>
+<!--    <Bank name = "DIGIBANK" filename="2021-10-25-2022-01-23" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
 <!--    <Bank name="BOI" filename="BOI" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
 
 

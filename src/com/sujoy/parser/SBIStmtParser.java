@@ -20,21 +20,17 @@ public class SBIStmtParser implements StatementParser {
 
     private static boolean isValidLine(String line) {
         if (line != null && line.length() > 20) {
-			SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MMM-yy");
+//			SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MMM-yyyy");
 //            SimpleDateFormat sdfDate = new SimpleDateFormat("dd MMM yyyy"); //post 2018
 
             String[] spl = line.split("\\t");
             try {
-
-                sdfDate.parse(spl[0]);
-                System.out.println(spl[0]);
+                Util.parse(spl[0]);
+                //sdfDate.parse(spl[0]);
+                System.out.println(Util.parse(spl[0]));
                 return Boolean.TRUE;
-            } catch (ParseException e) {
-                System.out.println("Date Exception " + spl[0]);
-
-                return Boolean.FALSE;
             } catch (Exception e) {
-                //System.out.println("Other Exception" + );
+                System.out.println("Date Exception " + spl[0]);
                 e.printStackTrace();
                 return Boolean.FALSE;
             }
@@ -77,7 +73,8 @@ public class SBIStmtParser implements StatementParser {
 
         MSMoney msMoneyFormat = new MSMoney();
 
-		msMoneyFormat.setDate(Util.interchangeMonthDate(st[0],"dd-MMM-yy"));
+//		msMoneyFormat.setDate(Util.interchangeMonthDate(st[0],"dd-MMM-yy"));
+		msMoneyFormat.setDate(Util.parse(st[0]));
 //        msMoneyFormat.setDate(Util.interchangeMonthDate(st[0], "dd MMM yyyy")); //Post 2018
         msMoneyFormat.setPayee(st[2]);
         msMoneyFormat.setRemarks(st[2]);

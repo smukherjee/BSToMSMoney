@@ -33,7 +33,12 @@ public class Util {
 //            "MM/dd/yyyy'T'HH:mm:ss.SSSZ", "MM/dd/yyyy'T'HH:mm:ss.SSS",
 //            "MM/dd/yyyy'T'HH:mm:ssZ",     "MM/dd/yyyy'T'HH:mm:ss",
 //            "yyyy:MM:dd HH:mm:ss",        "yyyyMMdd",
-            "dd/MM/yyyy","dd-MM-yyyy","dd-MMM-yy","dd-MMM-yyyy","dd-MMM"
+            "dd/MM/yyyy",
+            "dd-MM-yyyy",
+            "dd-MMM-yy",
+            "dd-MMM-yyyy", //DBS
+            "dd-MMM", //DBS
+            "dd MMM yyyy" //SBI
     };
     public static String parse(String d) {
         SimpleDateFormat sdf ;
