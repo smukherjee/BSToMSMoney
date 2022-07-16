@@ -36,6 +36,7 @@ public class Util {
             "dd/MM/yyyy",
             "dd-MM-yyyy",
             "dd-MMM-yy",
+            "yyyy/MMM/dd",
             "dd-MMM-yyyy", //DBS
             "dd-MMM", //DBS
             "dd MMM yyyy" //SBI

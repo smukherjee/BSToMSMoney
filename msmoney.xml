@@ -2,27 +2,26 @@
 
 <MSMONEY>
 
-    <!-- download as excel file -->
+<!-- download as excel file -->
 <!--    <Bank name = "Axis" filename="920010054731208" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-<!--    <Bank name = "ICICI" filename="OpTransactionHistory23-01-2022 5648" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-<!--    <Bank name = "ICICI" filename="OpTransactionHistory23-01-2022 4144" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-<!--    <Bank name = "ICICI" filename="OpTransactionHistory23-01-2022 pkr" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-<!--    <Bank name = "ICICI" filename="OpTransactionHistory23-01-2022 ajantaroy" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+    <Bank name = "ICICI" filename="OpTransactionHistory16-07-2022" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
 
-    <Bank name = "SBI" filename="1642947939762A7v25gnL8djpqE7j" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
+<!--    <Bank name = "SBI" filename="1653110182502bDeF4hN6W4O8Bp1L" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-<!--    <Bank name = "UNITEDBANK" filename="0470XXXXXX208117-05-2021" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-<!--    <Bank name = "KOTAK" filename="KM12836478_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
-<!--    Digibank csv is actually an excel file with different date formats-->
-<!--    <Bank name = "DIGIBANK" filename="2021-10-11-2021-12-31" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
-<!--    <Bank name = "DIGIBANK" filename="2021-10-25-2022-01-23" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
-<!--    <Bank name="BOI" filename="BOI" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+<!--    <Bank name = "UNITEDBANK" filename="0470XXXXXX208105-04-2022" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+
+<!--    <Bank name = "KOTAK" filename="7811333655_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+<!--    <Bank name = "KOTAK" filename="1546133122_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
 
 
-    <!-- Save as csv file -->
-    <!--<Bank name = "SYNDICATE" filename="1" filepath="C:\Users\Soham\Downloads" ext="csv"/>-->
-    <!--<Bank name = "SYNDICATE" filename="2" filepath="C:\Users\Soham\Downloads" ext="csv"/>-->
+    <!--    Digibank csv is actually an excel file with different date formats-->
+<!--    <Bank name = "DIGIBANK" filename="2022-04-01-2022-05-21" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+
+<!--    Download as excel and then save as csv-->
+<!--    <Bank name="BOI" filename="TUHINA MUKHERJEE" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+
+
 
 
 </MSMONEY>

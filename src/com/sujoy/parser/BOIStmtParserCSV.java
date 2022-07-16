@@ -19,13 +19,16 @@ public class BOIStmtParserCSV implements StatementParser {
     }
 
     private static boolean isValidLine(String[] line) {
-        SimpleDateFormat sdfDate = new SimpleDateFormat("MM-dd-yyyy");
+//        SimpleDateFormat sdfDate = new SimpleDateFormat("MM-dd-yyyy");
         try {
-            sdfDate.parse(line[1]);
+//            sdfDate.parse(line[1]);
+            Util.parse(line[1]);
+
             System.out.println(line[1]);
             return Boolean.TRUE;
-        } catch (ParseException | IndexOutOfBoundsException e) {
-            System.out.println("Date Exception ------------");
+//        } catch (ParseException | IndexOutOfBoundsException e) {
+        } catch (Exception e) {
+            System.out.println("Date Exception ------------"+ java.util.Arrays.toString(line));
             return Boolean.FALSE;
         }
     }
@@ -39,19 +42,19 @@ public class BOIStmtParserCSV implements StatementParser {
     private static void parseNWriteLine(String[] line, BufferedWriter writer) {
         try {
             MSMoney msMoneyFormat = new MSMoney();
-            msMoneyFormat.setDate(Util.interchangeMonthDate(line[1], "MM-dd-yyyy"));
+            msMoneyFormat.setDate(Util.parse(line[1]));
             msMoneyFormat.setPayee(line[2].replaceAll("[=,\"]", ""));
             msMoneyFormat.setRemarks(line[2].replaceAll("[=,\"]", ""));
             msMoneyFormat.setChequeNo(line[3].replaceAll("[=,\"]", ""));
 
-            if (!line[4].trim().equals("")) {
-                msMoneyFormat.setTransactionAmount('-' + line[4].trim());
+            if (!line[4].trim().equals("CR")) {
+                msMoneyFormat.setTransactionAmount('-' + line[5].trim());
             } else {
                 msMoneyFormat.setTransactionAmount(line[5].trim());
             }
             msMoneyFormat.write(writer);
-        } catch (ArrayIndexOutOfBoundsException | ParseException | IOException e) {
-            System.out.println("HHHHHHHHHHHHHHH");
+        } catch (ArrayIndexOutOfBoundsException  | IOException e) {
+            System.out.println("HHHHHHHHHHHHHHH"+ line);
             //Do nothing as the line is not a valid line, but has a date??
         }
     }

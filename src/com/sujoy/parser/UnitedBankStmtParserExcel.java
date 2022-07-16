@@ -61,7 +61,8 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                     switch (currentCell.getColumnIndex()) {
                         case 1: //Date
                             try {
-                                msMoneyFormat.setDate(Util.interchangeMonthDate(currentCell.getStringCellValue(), "dd/MM/yyyy"));
+                                msMoneyFormat.setDate(Util.parse(currentCell.getStringCellValue()));
+//                                msMoneyFormat.setDate(Util.interchangeMonthDate(currentCell.getStringCellValue(), "dd/MM/yyyy"));
                                 writeToFile = true;
                             } catch (Exception e) {
                                 writeToFile = false;
