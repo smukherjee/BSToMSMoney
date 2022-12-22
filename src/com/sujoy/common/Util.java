@@ -35,7 +35,7 @@ public class Util {
 //            "yyyy:MM:dd HH:mm:ss",        "yyyyMMdd",
             "dd/MM/yyyy",
             "dd-MM-yyyy",
-            "dd-MMM-yy",
+            "dd-MMM-yy", //Canara
             "yyyy/MMM/dd",
             "dd-MMM-yyyy", //DBS
             "dd-MMM", //DBS

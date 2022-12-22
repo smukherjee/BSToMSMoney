@@ -27,9 +27,9 @@ public class ParserHandler {
             case SBI: {
                 return new SBIStmtParser();
             }
-//		case SYNDICATE: {
-//			return new SYNDICATEStmtParser();
-//		}
+		case CANARABANK: {
+			return new CanaraBankStmtParserCSV();
+		}
             case Axis: {
                 return new AxisStmtParserExcel();
             }

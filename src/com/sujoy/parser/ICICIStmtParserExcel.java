@@ -90,20 +90,36 @@ public class ICICIStmtParserExcel implements StatementParser {
                             }
                             break;
                         case 6: //withdrawal
-                            if (currentCell.getCellType() == CellType.NUMERIC) {
-                                amt = currentCell.getNumericCellValue();
-                                if (amt > 0.0) {
-                                    msMoneyFormat.setTransactionAmount("-" + currentCell.getNumericCellValue());
-                                }
+                            try {
+                                if (currentCell.getStringCellValue().trim() != "" && Double.parseDouble(currentCell.getStringCellValue()) > 0.0)
+                                    msMoneyFormat.setTransactionAmount("-" + Double.parseDouble(currentCell.getStringCellValue()));
+                                //if (currentCell.getCellType() == CellType.NUMERIC) {
+//                                amt = currentCell.getNumericCellValue();
+//                                if (amt > 0.0) {
+//                                    msMoneyFormat.setTransactionAmount("-" + currentCell.getNumericCellValue());
+//                                }
+//                            }
+                            }
+                            catch (Exception e){
+
                             }
                             break;
                         case 7: // Deposit
-                            if (currentCell.getCellType() == CellType.NUMERIC) {
-                                amt = currentCell.getNumericCellValue();
-                                if (amt > 0.0) {
-                                    msMoneyFormat.setTransactionAmount("" + currentCell.getNumericCellValue());
-                                }
+                            try {
+
+                                if (currentCell.getStringCellValue().trim() != "" && Double.parseDouble(currentCell.getStringCellValue()) > 0.0)
+                                    msMoneyFormat.setTransactionAmount("" + Double.parseDouble(currentCell.getStringCellValue()));
+//                            if (currentCell.getCellType() == CellType.NUMERIC) {
+//                                amt = currentCell.getNumericCellValue();
+//                                if (amt > 0.0) {
+//                                    msMoneyFormat.setTransactionAmount("" + currentCell.getNumericCellValue());
+//                                }
+//                            }
+                            }catch (Exception e)
+                            {
+
                             }
+
                             break;
                     }
                 }
