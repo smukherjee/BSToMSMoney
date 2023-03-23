@@ -6,7 +6,6 @@ import com.sujoy.common.Util;
 
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  * @author sujoy
@@ -74,7 +73,7 @@ public class SBIStmtParser implements StatementParser {
         MSMoney msMoneyFormat = new MSMoney();
 
 //		msMoneyFormat.setDate(Util.interchangeMonthDate(st[0],"dd-MMM-yy"));
-		msMoneyFormat.setDate(Util.parse(st[0]));
+        msMoneyFormat.setDate(Util.parse(st[0]));
 //        msMoneyFormat.setDate(Util.interchangeMonthDate(st[0], "dd MMM yyyy")); //Post 2018
         msMoneyFormat.setPayee(st[2]);
         msMoneyFormat.setRemarks(st[2]);

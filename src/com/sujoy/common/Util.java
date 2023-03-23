@@ -1,4 +1,3 @@
-
 package com.sujoy.common;
 
 import java.text.ParseException;
@@ -8,23 +7,13 @@ import java.util.Calendar;
 
 /**
  * @author sujoy
- *
  */
 public class Util {
 
     /**
      * change input format type to specified formats
      */
-    private static final SimpleDateFormat  sdfMSMoneyDate = new SimpleDateFormat("MM/dd/yyyy");
-    public static String interchangeMonthDate(String date, String format)
-            throws ParseException {
-
-        SimpleDateFormat sdfInputDate = new SimpleDateFormat(format);
-
-        //Date givenDate = sdfDate.parse(date);
-        System.out.println(sdfMSMoneyDate.format(sdfInputDate.parse(date)));
-        return sdfMSMoneyDate.format(sdfInputDate.parse(date));
-    }
+    private static final SimpleDateFormat sdfMSMoneyDate = new SimpleDateFormat("MM/dd/yyyy");
     private static final String[] formats = {
 //            "yyyy-MM-dd'T'HH:mm:ss'Z'",   "yyyy-MM-dd'T'HH:mm:ssZ",
 //            "yyyy-MM-dd'T'HH:mm:ss",      "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
@@ -36,25 +25,37 @@ public class Util {
             "dd/MM/yyyy",
             "dd-MM-yyyy",
             "dd-MMM-yy", //Canara
+            "dd-MM-yyyy HH:MM:SS", //Canara
             "yyyy/MMM/dd",
             "dd-MMM-yyyy", //DBS
             "dd-MMM", //DBS
             "dd MMM yyyy" //SBI
     };
+
+    public static String interchangeMonthDate(String date, String format)
+            throws ParseException {
+
+        SimpleDateFormat sdfInputDate = new SimpleDateFormat(format);
+
+        //Date givenDate = sdfDate.parse(date);
+        System.out.println(sdfMSMoneyDate.format(sdfInputDate.parse(date)));
+        return sdfMSMoneyDate.format(sdfInputDate.parse(date));
+    }
+
     public static String parse(String d) {
-        SimpleDateFormat sdf ;
-        String finalDate=null;
+        SimpleDateFormat sdf;
+        String finalDate = null;
         if (d != null) {
 
             for (String parseFormat : formats) {
-               sdf = new SimpleDateFormat(parseFormat);
+                sdf = new SimpleDateFormat(parseFormat);
                 try {
-                    finalDate=sdfMSMoneyDate.format(sdf.parse(d));
-                    if (sdf.parse(d).getYear()==70){ // if the year is not passed then java instantiates it to 1970, then replace
+                    finalDate = sdfMSMoneyDate.format(sdf.parse(d));
+                    if (sdf.parse(d).getYear() == 70) { // if the year is not passed then java instantiates it to 1970, then replace
                         Calendar now = Calendar.getInstance();
                         int year = now.get(Calendar.YEAR);
                         String yearInString = String.valueOf(year);
-                        finalDate=finalDate.replace("1970",yearInString);
+                        finalDate = finalDate.replace("1970", yearInString);
                     }
                     System.out.println("Converted Date --- " + finalDate);
                     return finalDate;
@@ -65,20 +66,20 @@ public class Util {
             }
         }
         if (!finalDate.equals(null)) {
-            System.out.println("Couldn't convert date " + d );
+            System.out.println("Couldn't convert date " + d);
         }
         return finalDate;
     }
 
     public static boolean isValidLine(String d) {
-        SimpleDateFormat sdf ;
-        boolean converted=false;
+        SimpleDateFormat sdf;
+        boolean converted = false;
         if (d != null) {
             for (String parseFormat : formats) {
                 sdf = new SimpleDateFormat(parseFormat);
                 try {
                     sdfMSMoneyDate.format(sdf.parse(d));
-                    converted=true;
+                    converted = true;
                     return converted;
                 } catch (ParseException e) {
                     //e.printStackTrace();
@@ -86,14 +87,14 @@ public class Util {
                 }
             }
         }
-        if (!converted){
+        if (!converted) {
             System.out.println("Couldn't convert date --- " + d);
         }
         return converted;
     }
 
-    public static void main(String[] args)  {
-        String yyyyMMdd = "11-Oct";
+    public static void main(String[] args) {
+        String yyyyMMdd = "22-06-2022 08:19:24";
         parse(yyyyMMdd);
         System.out.println(isValidLine(yyyyMMdd));
 

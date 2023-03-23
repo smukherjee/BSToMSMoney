@@ -6,7 +6,6 @@ import com.sujoy.common.Util;
 
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  * @author sujoy
@@ -28,7 +27,7 @@ public class BOIStmtParserCSV implements StatementParser {
             return Boolean.TRUE;
 //        } catch (ParseException | IndexOutOfBoundsException e) {
         } catch (Exception e) {
-            System.out.println("Date Exception ------------"+ java.util.Arrays.toString(line));
+            System.out.println("Date Exception ------------" + java.util.Arrays.toString(line));
             return Boolean.FALSE;
         }
     }
@@ -53,8 +52,8 @@ public class BOIStmtParserCSV implements StatementParser {
                 msMoneyFormat.setTransactionAmount(line[5].trim());
             }
             msMoneyFormat.write(writer);
-        } catch (ArrayIndexOutOfBoundsException  | IOException e) {
-            System.out.println("HHHHHHHHHHHHHHH"+ line);
+        } catch (ArrayIndexOutOfBoundsException | IOException e) {
+            System.out.println("HHHHHHHHHHHHHHH" + line);
             //Do nothing as the line is not a valid line, but has a date??
         }
     }

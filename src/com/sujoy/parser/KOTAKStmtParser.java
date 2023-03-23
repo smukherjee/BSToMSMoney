@@ -6,7 +6,6 @@ import com.sujoy.common.Util;
 
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  * @author sujoy
@@ -56,7 +55,7 @@ public class KOTAKStmtParser implements StatementParser {
                 msMoneyFormat.setTransactionAmount(line[5].trim());
             }
             msMoneyFormat.write(writer);
-        } catch (ArrayIndexOutOfBoundsException |  IOException e) {
+        } catch (ArrayIndexOutOfBoundsException | IOException e) {
             System.out.println("HHHHHHHHHHHHHHH");
             //Do nothing as the line is not a valid line, but has a date??
         }
@@ -87,8 +86,7 @@ public class KOTAKStmtParser implements StatementParser {
                     if (Util.isValidLine(line[2])) {
                         parseNWriteLine(line, writer);
                     }
-                }
-                catch(IndexOutOfBoundsException indexOutOfBoundsException){
+                } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
                     //ignore
                 }
             }

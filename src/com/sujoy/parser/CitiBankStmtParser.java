@@ -28,7 +28,6 @@ import java.util.ArrayList;
 
 /**
  * @author sujoy
- *
  */
 public class CitiBankStmtParser implements StatementParser {
 
@@ -80,7 +79,6 @@ public class CitiBankStmtParser implements StatementParser {
 
     /**
      * @param row
-     * @param dd
      * @throws ParseException
      */
     private MSMoney parseColumnData(TableRow row) throws ParseException {

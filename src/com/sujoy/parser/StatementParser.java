@@ -10,7 +10,6 @@ import java.text.ParseException;
 
 /**
  * @author sujoy
- *
  */
 public interface StatementParser {
 

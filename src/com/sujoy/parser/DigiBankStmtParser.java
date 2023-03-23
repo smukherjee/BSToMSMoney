@@ -32,10 +32,9 @@ public class DigiBankStmtParser implements StatementParser {
             msMoneyFormat.setPayee(line[1]);
             msMoneyFormat.setRemarks(line[1]);
 
-            if(!line[2].trim().equals("")) {
+            if (!line[2].trim().equals("")) {
                 msMoneyFormat.setTransactionAmount('-' + line[2].trim());
-            }
-            else {
+            } else {
                 msMoneyFormat.setTransactionAmount(line[3].trim());
             }
             msMoneyFormat.write(writer);

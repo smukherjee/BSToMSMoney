@@ -99,8 +99,7 @@ public class ICICIStmtParserExcel implements StatementParser {
 //                                    msMoneyFormat.setTransactionAmount("-" + currentCell.getNumericCellValue());
 //                                }
 //                            }
-                            }
-                            catch (Exception e){
+                            } catch (Exception e) {
 
                             }
                             break;
@@ -115,8 +114,7 @@ public class ICICIStmtParserExcel implements StatementParser {
 //                                    msMoneyFormat.setTransactionAmount("" + currentCell.getNumericCellValue());
 //                                }
 //                            }
-                            }catch (Exception e)
-                            {
+                            } catch (Exception e) {
 
                             }
 

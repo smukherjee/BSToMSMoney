@@ -8,7 +8,6 @@ import java.io.IOException;
 
 /**
  * @author sujoy
- *
  */
 public class MSMoney {
 
@@ -54,8 +53,7 @@ public class MSMoney {
     /**
      * sets date
      *
-     * @param date
-     *            The date to set.
+     * @param date The date to set.
      */
     public void setDate(String date) {
         this.date = date;
@@ -73,8 +71,7 @@ public class MSMoney {
     /**
      * sets chequeNo
      *
-     * @param chequeNo
-     *            The chequeNo to set.
+     * @param chequeNo The chequeNo to set.
      */
     public void setChequeNo(String chequeNo) {
         this.chequeNo = chequeNo;
@@ -92,8 +89,7 @@ public class MSMoney {
     /**
      * sets payee
      *
-     * @param payee
-     *            The payee to set.
+     * @param payee The payee to set.
      */
     public void setPayee(String payee) {
         this.payee = payee;
@@ -111,8 +107,7 @@ public class MSMoney {
     /**
      * sets remarks
      *
-     * @param remarks
-     *            The remarks to set.
+     * @param remarks The remarks to set.
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
@@ -130,8 +125,7 @@ public class MSMoney {
     /**
      * sets transactionAmount
      *
-     * @param transactionAmount
-     *            The transactionAmount to set.
+     * @param transactionAmount The transactionAmount to set.
      */
     public void setTransactionAmount(String transactionAmount) {
         this.transactionAmount = transactionAmount;
