@@ -57,7 +57,7 @@ public class AxisStmtParserExcel implements StatementParser {
                     Cell currentCell = cellIterator.next();
 
 //						SRL NO	Tran Date	CHQNO	PARTICULARS	DR	CR	BAL	SOL
-                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell.toString());
+                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
 
                     switch (currentCell.getColumnIndex()) {
                         case 1: //Date

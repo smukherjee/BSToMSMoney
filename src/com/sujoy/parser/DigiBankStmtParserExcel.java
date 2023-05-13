@@ -56,7 +56,7 @@ public class DigiBankStmtParserExcel implements StatementParser {
                 while (cellIterator.hasNext()) {
                     Cell currentCell = cellIterator.next();
 //                    Date	Transaction	Debit	Credit
-                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell.toString());
+                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
 
                     switch (currentCell.getColumnIndex()) {
                         case 0: //Date

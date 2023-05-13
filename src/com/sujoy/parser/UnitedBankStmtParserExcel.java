@@ -56,7 +56,7 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                 while (cellIterator.hasNext()) {
                     Cell currentCell = cellIterator.next();
 //Transaction Date		Cheque Number		Withdrawal		Deposit	Balance	Narration
-                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell.toString());
+                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
 
                     switch (currentCell.getColumnIndex()) {
                         case 1: //Date

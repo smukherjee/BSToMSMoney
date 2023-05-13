@@ -17,14 +17,14 @@ public class FileUtil {
      * @return finputStream
      * @throws FileNotFoundException
      */
-    public static FileInputStream readFile(String path)
-            throws FileNotFoundException {
-        File file = new File(path);
-        FileInputStream finputStream;
-        finputStream = new FileInputStream(file);
-
-        return finputStream;
-    }
+//    public static FileInputStream readFile(String path)
+//            throws FileNotFoundException {
+//        File file = new File(path);
+//        FileInputStream finputStream;
+//        finputStream = new FileInputStream(file);
+//
+//        return finputStream;
+//    }
 
     /**
      * Closes BufferedReader and BufferedWriter

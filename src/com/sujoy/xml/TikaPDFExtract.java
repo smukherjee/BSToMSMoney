@@ -44,7 +44,7 @@ public class TikaPDFExtract {
 
             System.out.println("Done");
 
-            System.out.println(contenthandler.toString());
+            System.out.println(contenthandler);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

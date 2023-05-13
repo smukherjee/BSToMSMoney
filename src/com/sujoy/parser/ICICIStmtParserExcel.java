@@ -57,7 +57,7 @@ public class ICICIStmtParserExcel implements StatementParser {
                     Cell currentCell = cellIterator.next();
 
 //	                    S No.--Value Date--Transaction Date--Cheque Number--Transaction Remarks--Withdrawal Amount (INR )--Deposit Amount (INR )--Balance (INR )--
-                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell.toString());
+                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
 
 //	                    if (currentCell.getCellType() == CellType.STRING) {
 //	                        System.out.println(currentCell.getStringCellValue() );
