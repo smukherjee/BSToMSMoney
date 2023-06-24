@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 /**
  * @author sujoy
  */
-public class SYNDICATEStmtParser implements StatementParser {
+@Deprecated public class SYNDICATEStmtParser implements StatementParser {
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
         writer.write("!Type:Bank");

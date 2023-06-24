@@ -1,8 +1,17 @@
 package com.sujoy.common;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 //import java.util.Date;
 
 /**
@@ -91,6 +100,44 @@ public class Util {
             System.out.println("Couldn't convert date --- " + d);
         }
         return converted;
+    }
+
+    //open excel file for writhing
+    public static Map<String ,Object> openExcelFile(String path, String filename, String ext) {
+        BufferedWriter writer = null;
+        BufferedReader reader = null;
+        Workbook workbook = null;
+        Sheet datatypeSheet = null;
+        Iterator <Row> iterator = null;
+        boolean writeToFile = false;
+
+        try {
+            FileInputStream excelFile = new FileInputStream(new File(path + File.separator + filename + "." + ext));
+            Double amt = 0.0;
+            //Workbook workbook = new XSSFWorkbook(excelFile);
+             workbook = new HSSFWorkbook(excelFile);
+             datatypeSheet = workbook.getSheetAt(0);
+             iterator = datatypeSheet.iterator();
+
+
+            writer = new BufferedWriter(new FileWriter(path + File.separator + "Converted"
+                    + filename + ".qif"));
+            writeHeader(writer);
+
+        } catch (Exception e) {
+            System.out.println("Error opening file " + filename);
+        }
+        Map<String, Object> result = new HashMap<>();
+        result.put("reader", reader);
+        result.put("writer", writer);
+        result.put("workbook", workbook);
+        result.put("datatypeSheet", datatypeSheet);
+
+        return result;
+    }
+    private static void writeHeader(BufferedWriter writer) throws IOException {
+        writer.write("!Type:Bank");
+        writer.newLine();
     }
 
     public static void main(String[] args) {

@@ -13,7 +13,7 @@ import java.util.Iterator;
 /**
  * @author sujoy
  */
-public class BOIStmtParserExcel implements StatementParser {
+@Deprecated public class BOIStmtParserExcel implements StatementParser {
 
     /*
      * (non-Javadoc)

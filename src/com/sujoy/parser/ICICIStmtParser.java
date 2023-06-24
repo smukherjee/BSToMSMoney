@@ -11,12 +11,8 @@ import java.text.SimpleDateFormat;
 /**
  * @author sujoy
  */
-public class ICICIStmtParser implements StatementParser {
+@Deprecated public class ICICIStmtParser implements StatementParser {
 
-    /**
-     * @param line
-     * @return
-     */
     private static final int dtStart = 36;
     private static final int dtEnd = 47;
     private static final int payeeStart = 78;
@@ -53,12 +49,6 @@ public class ICICIStmtParser implements StatementParser {
         return Boolean.FALSE;
     }
 
-    /**
-     * @param line
-     * @param writer
-     * @throws IOException
-     * @throws ParseException
-     */
     private static void parseNWriteLine(String line, BufferedWriter writer)
             throws IOException, ParseException {
         String debit;

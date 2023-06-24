@@ -10,7 +10,7 @@ import java.text.ParseException;
 /**
  * @author sujoy
  */
-public class DigiBankStmtParser implements StatementParser {
+@Deprecated public class DigiBankStmtParser implements StatementParser {
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
         writer.write("!Type:Bank");
@@ -18,12 +18,6 @@ public class DigiBankStmtParser implements StatementParser {
     }
 
 
-    /**
-     * @param line
-     * @param writer
-     * @throws IOException
-     * @throws ParseException
-     */
     private static void parseNWriteLine(String[] line, BufferedWriter writer) {
         try {
             MSMoney msMoneyFormat = new MSMoney();

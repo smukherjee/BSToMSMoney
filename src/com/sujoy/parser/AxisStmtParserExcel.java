@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.*;
 import java.io.*;
 import java.text.ParseException;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @author sujoy
@@ -29,9 +30,12 @@ public class AxisStmtParserExcel implements StatementParser {
 
     public void parse(String path, String filename, String ext) throws IOException, ParseException {
 
+//        Map<String,Object> result= Util.openExcelFile( path,  filename,  ext);
+
         BufferedWriter writer = null;
         BufferedReader reader = null;
         MSMoney msMoneyFormat = new MSMoney();
+
         try {
 
             FileInputStream excelFile = new FileInputStream(new File(path + File.separator + filename + "." + ext));
@@ -47,16 +51,18 @@ public class AxisStmtParserExcel implements StatementParser {
             writeHeader(writer);
 
             boolean writeToFile = false;
-            while (iterator.hasNext()) {
+
+
+
+            while (true) {
+                assert iterator != null;
+                if (!iterator.hasNext()) break;
+
 
                 Row currentRow = iterator.next();
 
-                Iterator<Cell> cellIterator = currentRow.iterator();
-
-                while (cellIterator.hasNext()) {
-                    Cell currentCell = cellIterator.next();
-
-//						SRL NO	Tran Date	CHQNO	PARTICULARS	DR	CR	BAL	SOL
+                for (Cell currentCell : currentRow) {
+                    //						SRL NO	Tran Date	CHQNO	PARTICULARS	DR	CR	BAL	SOL
                     System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
 
                     switch (currentCell.getColumnIndex()) {
@@ -84,7 +90,7 @@ public class AxisStmtParserExcel implements StatementParser {
                         case 4: //withdrawal - For axis this comes as string
                             if (currentCell.getCellType() == CellType.STRING) {
                                 try {
-                                    amt = Double.valueOf(currentCell.getStringCellValue());
+                                    amt = Double.parseDouble(currentCell.getStringCellValue());
                                     if (amt > 0.0) {
                                         msMoneyFormat.setTransactionAmount("-" + currentCell.getStringCellValue().trim());
                                     }
@@ -98,7 +104,7 @@ public class AxisStmtParserExcel implements StatementParser {
                         case 5: // Deposit
                             if (currentCell.getCellType() == CellType.STRING) {
                                 try {
-                                    amt = Double.valueOf(currentCell.getStringCellValue());
+                                    amt = Double.parseDouble(currentCell.getStringCellValue());
                                     if (amt > 0.0) {
                                         msMoneyFormat.setTransactionAmount("" + currentCell.getStringCellValue().trim());
                                     }
@@ -117,8 +123,6 @@ public class AxisStmtParserExcel implements StatementParser {
                 }
 
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

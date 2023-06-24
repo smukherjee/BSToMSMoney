@@ -24,22 +24,33 @@ public class MSMoney {
      * @param writer
      * @throws IOException
      */
+//    public void write(BufferedWriter writer) throws IOException {
+//        if (getDate() != null) {
+//            writer.write('D' + getDate());
+//            writer.newLine();
+//            writer.write('T' + getTransactionAmount());
+//            writer.newLine();
+//            writer.write('N' + getChequeNo());
+//            writer.newLine();
+//            writer.write('P' + getPayee());
+//            writer.newLine();
+//            writer.write('M' + getRemarks());
+//            writer.newLine();
+//            writer.write('^');
+//            writer.newLine();
+//        }
+//    }
     public void write(BufferedWriter writer) throws IOException {
         if (getDate() != null) {
-            writer.write('D' + getDate());
-            writer.newLine();
-            writer.write('T' + getTransactionAmount());
-            writer.newLine();
-            writer.write('N' + getChequeNo());
-            writer.newLine();
-            writer.write('P' + getPayee());
-            writer.newLine();
-            writer.write('M' + getRemarks());
-            writer.newLine();
-            writer.write('^');
-            writer.newLine();
+            writer.write("D" + getDate() + "\n" +
+                    "T" + getTransactionAmount() + "\n" +
+                    "N" + getChequeNo() + "\n" +
+                    "P" + getPayee() + "\n" +
+                    "M" + getRemarks() + "\n" +
+                    "^\n");
         }
     }
+
 
     /**
      * returns date

@@ -13,7 +13,7 @@ import java.util.Iterator;
 /**
  * @author sujoy
  */
-public class DigiBankStmtParserExcel implements StatementParser {
+@Deprecated public class DigiBankStmtParserExcel implements StatementParser {
 
     /*
      * (non-Javadoc)

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * @author sujoy
  */
-public class CitiBankStmtParser implements StatementParser {
+@Deprecated public class CitiBankStmtParser implements StatementParser {
 
     /*
      * (non-Javadoc)

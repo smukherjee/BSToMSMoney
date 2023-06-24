@@ -11,12 +11,7 @@ import java.text.SimpleDateFormat;
 /**
  * @author sujoy
  */
-public class BOIStmtParser implements StatementParser {
-
-    /**
-     * @param line
-     * @return
-     */
+@Deprecated public class BOIStmtParser implements StatementParser {
 
     private static final int dtStart = 24;
     private static final int dtEnd = 35;
@@ -52,12 +47,6 @@ public class BOIStmtParser implements StatementParser {
         return Boolean.FALSE;
     }
 
-    /**
-     * @param line
-     * @param writer
-     * @throws IOException
-     * @throws ParseException
-     */
     private static void parseNWriteLine(String line, BufferedWriter writer)
             throws IOException, ParseException {
         String debit;
