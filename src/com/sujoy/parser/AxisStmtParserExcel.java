@@ -9,7 +9,7 @@ import org.apache.poi.ss.usermodel.*;
 import java.io.*;
 import java.text.ParseException;
 import java.util.Iterator;
-import java.util.Map;
+//import java.util.Map;
 
 /**
  * @author sujoy
@@ -38,8 +38,8 @@ public class AxisStmtParserExcel implements StatementParser {
 
         try {
 
-            FileInputStream excelFile = new FileInputStream(new File(path + File.separator + filename + "." + ext));
-            Double amt = 0.0;
+            FileInputStream excelFile = new FileInputStream(path + File.separator + filename + "." + ext);
+            double amt ;
             //Workbook workbook = new XSSFWorkbook(excelFile);
             Workbook workbook = new HSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
@@ -53,14 +53,8 @@ public class AxisStmtParserExcel implements StatementParser {
             boolean writeToFile = false;
 
 
-
-            while (true) {
-                assert iterator != null;
-                if (!iterator.hasNext()) break;
-
-
+            while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
-
                 for (Cell currentCell : currentRow) {
                     //						SRL NO	Tran Date	CHQNO	PARTICULARS	DR	CR	BAL	SOL
                     System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
