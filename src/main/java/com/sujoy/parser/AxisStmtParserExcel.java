@@ -1,127 +1,96 @@
 package com.sujoy.parser;
 
-import com.sujoy.common.FileUtil;
-import com.sujoy.common.MSMoney;
-import com.sujoy.common.Util;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Iterator;
-//import java.util.Map;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+
+import com.sujoy.common.ErrorHandler;
+import com.sujoy.common.ExcelFileHandler;
+import com.sujoy.common.MSMoney;
+import com.sujoy.common.Util;
 
 /**
- * @author sujoy
+ * Parser for Axis Bank Excel statements.
+ * Implements the StatementParser interface.
  */
 public class AxisStmtParserExcel implements StatementParser {
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.sujoy.parser.StatementParser#parse(java.lang.String)
-     */
-
-
-    private static void writeHeader(BufferedWriter writer) throws IOException {
-        writer.write("!Type:Bank");
-        writer.newLine();
-    }
-
+    @Override
     public void parse(String path, String filename, String ext) throws IOException, ParseException {
-
-//        Map<String,Object> result= Util.openExcelFile( path,  filename,  ext);
-
-        BufferedWriter writer = null;
-        BufferedReader reader = null;
-        MSMoney msMoneyFormat = new MSMoney();
-
+        ExcelFileHandler fileHandler = new ExcelFileHandler();
         try {
+            fileHandler.openFile(path, filename, ext);
 
-            FileInputStream excelFile = new FileInputStream(path + File.separator + filename + "." + ext);
-            double amt ;
-            //Workbook workbook = new XSSFWorkbook(excelFile);
-            Workbook workbook = new HSSFWorkbook(excelFile);
-            Sheet datatypeSheet = workbook.getSheetAt(0);
-            Iterator<Row> iterator = datatypeSheet.iterator();
+            Iterator<Row> iterator = fileHandler.getRowIterator();
+            BufferedWriter writer = fileHandler.getWriter();
 
-
-            writer = new BufferedWriter(new FileWriter(path + File.separator + "Converted"
-                    + filename + ".qif"));
-            writeHeader(writer);
-
-            boolean writeToFile = false;
-
+            boolean writeToFile;
+            MSMoney msMoneyFormat = new MSMoney();
 
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
-                for (Cell currentCell : currentRow) {
-                    //						SRL NO	Tran Date	CHQNO	PARTICULARS	DR	CR	BAL	SOL
-                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
+                writeToFile = processRow(currentRow, msMoneyFormat);
 
-                    switch (currentCell.getColumnIndex()) {
-                        case 1: //Date
-                            try {
-                                msMoneyFormat.setDate(Util.interchangeMonthDate(currentCell.getStringCellValue(), "dd-MM-yyyy"));
-                                writeToFile = true;
-                            } catch (Exception e) {
-                                writeToFile = false;
-                                System.out.println(currentCell.getStringCellValue() + "--- Exception Date");
-                            }
-                            break;
-
-                        case 2:// Cheque
-                            if (currentCell.getCellType() == CellType.STRING) {
-                                msMoneyFormat.setChequeNo((currentCell.getStringCellValue()));
-                            }
-                            break;
-                        case 3: //Remarks - Payee
-                            if (currentCell.getCellType() == CellType.STRING) {
-                                msMoneyFormat.setPayee(currentCell.getStringCellValue());
-                                msMoneyFormat.setRemarks(currentCell.getStringCellValue());
-                            }
-                            break;
-                        case 4: //withdrawal - For axis this comes as string
-                            if (currentCell.getCellType() == CellType.STRING) {
-                                try {
-                                    amt = Double.parseDouble(currentCell.getStringCellValue());
-                                    if (amt > 0.0) {
-                                        msMoneyFormat.setTransactionAmount("-" + currentCell.getStringCellValue().trim());
-                                    }
-                                } catch (Exception e) {
-//										writeToFile=false;
-
-                                }
-
-                            }
-                            break;
-                        case 5: // Deposit
-                            if (currentCell.getCellType() == CellType.STRING) {
-                                try {
-                                    amt = Double.parseDouble(currentCell.getStringCellValue());
-                                    if (amt > 0.0) {
-                                        msMoneyFormat.setTransactionAmount("" + currentCell.getStringCellValue().trim());
-                                    }
-                                } catch (Exception e) {
-//										writeToFile=false;
-
-                                }
-                            }
-                            break;
-                    }
-                }
-                //System.out.println("----------------------");
                 if (writeToFile) {
                     msMoneyFormat.write(writer);
-                    writeToFile = false;
                 }
-
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
-            FileUtil.closeReaderWriter(reader, writer);
+            fileHandler.closeResources();
         }
+    }
+
+    private boolean processRow(Row currentRow, MSMoney msMoneyFormat) {
+        boolean writeToFile = false;
+
+        for (Cell currentCell : currentRow) {
+            int columnIndex = currentCell.getColumnIndex();
+            String cellValue = currentCell.getStringCellValue().trim();
+
+            switch (columnIndex) {
+                case 1: // Date
+                    try {
+                        msMoneyFormat.setDate(Util.interchangeMonthDate(cellValue, "dd-MM-yyyy"));
+                        writeToFile = true;
+                    } catch (Exception e) {
+                        ErrorHandler.logWarning(currentCell.getStringCellValue() + "--- Exception Date", e);
+                        writeToFile = false;
+                    }
+                    break;
+
+                case 2: // Cheque Number
+                    if (currentCell.getCellType() == CellType.STRING) {
+                        msMoneyFormat.setChequeNo(currentCell.getStringCellValue().trim());
+                    }
+                    break;
+
+                case 3: // Remarks - Payee
+                    if (currentCell.getCellType() == CellType.STRING) {
+                        msMoneyFormat.setPayee(cellValue);
+                        msMoneyFormat.setRemarks(cellValue);
+                    }
+                    break;
+
+                case 4: // Withdrawal
+                    if (currentCell.getCellType() == CellType.STRING) {
+                        Util.processTransactionAmount(cellValue, msMoneyFormat, true);
+                    }
+                    break;
+
+                case 5: // Deposit
+                    if (currentCell.getCellType() == CellType.STRING) {
+                        Util.processTransactionAmount(cellValue, msMoneyFormat, false);
+
+                    }
+                    break;
+            }
+        }
+        return writeToFile;
     }
 
 }

@@ -1,18 +1,23 @@
 package com.sujoy.common;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import com.sujoy.common.ErrorHandler;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 //import java.util.Date;
 
 /**
@@ -190,6 +195,20 @@ public class Util {
         writer.newLine();
     }
 
+public static void processTransactionAmount(String cellValue, MSMoney msMoneyFormat, boolean isWithdrawal) {
+        if (!cellValue.isEmpty()) {
+            try {
+                double amount = Double.parseDouble(cellValue);
+                if (amount > 0.0) {
+                    String transactionAmount = (isWithdrawal ? "-" : "") + amount;
+                    msMoneyFormat.setTransactionAmount(transactionAmount);
+                }
+            } catch (NumberFormatException e) {
+                ErrorHandler.logWarning("Invalid transaction amount: " + cellValue, e);
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         String yyyyMMdd = "22-06-2022 08:19:24";
         try {
