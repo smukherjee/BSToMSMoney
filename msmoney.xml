@@ -3,18 +3,24 @@
 <MSMONEY>
 
 <!--download as excel file -->
-    <Bank name = "Axis" filename="922010040809636" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
-    <!--<Bank name = "ICICI" filename="OpTransactionHistory13-05-2023" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-    <!--<Bank name = "SBI" filename="1657954101925vXpPWBUJ6Avp98Pq" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-    <!--<Bank name="UNITEDBANK" filename="0470XXXXXX208105-03-2023" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-    <!--<Bank name = "KOTAK" filename="KM127630641_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
-    <!--<Bank name = "KOTAK" filename="7811333655_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
-    <!--fOR CANARABANK CHECK IF "=" IS COMING IN THE CSV FILE, IF YES REPLACE IT-->
-    <!--<Bank name = "CANARABANK" filename="1677998997228" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
-    <!--<Bank name = "CANARABANK" filename="1677999049315" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+<!--    <Bank name = "Axis" filename="922010040809636" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+    <Bank name = "ICICI" filename="OpTransactionHistory02-05-2025" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
+<!--    <Bank name = "ICICI" filename="OpTransactionHistory13-07-2024(1)" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+<!--    <Bank name = "ICICI" filename="OpTransactionHistory13-07-2024(2)" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
-    <!--Download as excel and then save as csv-->
-    <!--<Bank name="BOI" filename="TUHINA MUKHERJEE-2" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+
+<!--    <Bank name = "SBI" filename="1744006054259W7wv1YKfFlRXhctv" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+<!--    <Bank name = "SBI" filename="1744006077446uENrXaxwHIgdE2J6" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+
+<!--    <Bank name="UNITEDBANK" filename="0470XXXXXX208108-12-2024" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
+<!--    <Bank name = "KOTAK" filename="KM12836478_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+<!--    <Bank name = "KOTAK" filename="7811333655_statement" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+<!--    &lt;!&ndash;fOR CANARABANK CHECK IF "=" IS COMING IN THE CSV FILE, IF YES REPLACE IT&ndash;&gt;-->
+<!--    <Bank name = "CANARABANK" filename="1743608647727" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+<!--    <Bank name = "CANARABANK" filename="1720847719768" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+
+<!--    &lt;!&ndash;Download as excel and then save as csv&ndash;&gt;-->
+<!--    <Bank name="BOI" filename="TUHINA MUKHERJEE" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
 
 
     <!--Closed Bank Accounts-->

@@ -1,5 +1,6 @@
 package com.sujoy.xml;
 
+import com.sujoy.common.ErrorHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -39,8 +40,11 @@ public class BasicDom {
             return doc;
         } catch (SAXException e) {
             // A parsing error occurred; the xml input is not valid
+            ErrorHandler.logError("XML parsing error in file: " + filename, e);
         } catch (ParserConfigurationException e) {
+            ErrorHandler.logError("XML parser configuration error for file: " + filename, e);
         } catch (IOException e) {
+            ErrorHandler.logError("I/O error reading XML file: " + filename, e);
         }
         return null;
     }

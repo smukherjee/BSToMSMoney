@@ -28,7 +28,9 @@ public class CanaraBankStmtParserCSV implements StatementParser {
         try {
             MSMoney msMoneyFormat = new MSMoney();
 //            msMoneyFormat.setDate(Util.interchangeMonthDate(line[2], "dd/MM/yyyy"));
-            msMoneyFormat.setDate(Util.parse(line[0]));
+            if(line[0]!=null && !line[0].trim().equals("")) {
+                msMoneyFormat.setDate(Util.parse(line[0].replace("=", "")));
+            }
             msMoneyFormat.setPayee(line[3]);
             msMoneyFormat.setRemarks(line[3]);
 
@@ -38,7 +40,7 @@ public class CanaraBankStmtParserCSV implements StatementParser {
                 msMoneyFormat.setTransactionAmount(line[6].trim());//Credit
             }
             msMoneyFormat.write(writer);
-        } catch (ArrayIndexOutOfBoundsException | IOException e) {
+        } catch (ArrayIndexOutOfBoundsException | IOException | ParseException e) {
             System.out.println("Error in parsing" + e.getMessage());
             //Do nothing as the line is not a valid line, but has a date??
         }
@@ -65,8 +67,10 @@ public class CanaraBankStmtParserCSV implements StatementParser {
 
 
             while ((line = reader.readNext()) != null) {
-                if (Util.isValidLine(line[0])) {
-                    parseNWriteLine(line, writer);
+                if(line[0]!=null && !line[0].trim().equals("")) {
+                    if (Util.isValidLine(line[0].replace("=", ""))) {
+                        parseNWriteLine(line, writer);
+                    }
                 }
             }
         } finally {

@@ -32,7 +32,7 @@ import java.text.ParseException;
                 msMoneyFormat.setTransactionAmount(line[3].trim());
             }
             msMoneyFormat.write(writer);
-        } catch (ArrayIndexOutOfBoundsException | IOException e) {
+        } catch (ArrayIndexOutOfBoundsException | IOException | ParseException e) {
             System.out.println("Error in parsing" + e.getMessage());
             //Do nothing as the line is not a valid line, but has a date??
         }

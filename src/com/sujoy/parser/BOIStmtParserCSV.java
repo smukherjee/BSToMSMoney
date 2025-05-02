@@ -52,7 +52,7 @@ public class BOIStmtParserCSV implements StatementParser {
                 msMoneyFormat.setTransactionAmount(line[5].trim());
             }
             msMoneyFormat.write(writer);
-        } catch (ArrayIndexOutOfBoundsException | IOException e) {
+        } catch (ArrayIndexOutOfBoundsException | IOException | ParseException e) {
             System.out.println("HHHHHHHHHHHHHHH" + line);
             //Do nothing as the line is not a valid line, but has a date??
         }

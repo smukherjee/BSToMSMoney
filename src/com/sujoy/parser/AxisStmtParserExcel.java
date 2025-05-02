@@ -110,7 +110,7 @@ public class AxisStmtParserExcel implements StatementParser {
                             break;
                     }
                 }
-                System.out.println("----------------------");
+                //System.out.println("----------------------");
                 if (writeToFile) {
                     msMoneyFormat.write(writer);
                     writeToFile = false;

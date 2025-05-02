@@ -4,6 +4,7 @@
 package com.sujoy.common;
 
 import java.io.*;
+import com.sujoy.common.ErrorHandler;
 
 /**
  * @author sujoy
@@ -27,28 +28,28 @@ public class FileUtil {
 //    }
 
     /**
-     * Closes BufferedReader and BufferedWriter
-     *
-     * @param reader
-     * @param writer
+     * Closes BufferedReader and BufferedWriter safely, handling any exceptions
+     * 
+     * @param reader BufferedReader to close
+     * @param writer BufferedWriter to close
      */
     public static void closeReaderWriter(BufferedReader reader,
                                          BufferedWriter writer) {
-        try {
-            if (reader != null) {
+        if (reader != null) {
+            try {
                 reader.close();
+            } catch (IOException ex) {
+                ErrorHandler.logWarning("Error closing reader", ex);
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
 
-        try {
-            if (writer != null) {
+        if (writer != null) {
+            try {
                 writer.flush();
                 writer.close();
+            } catch (IOException ex) {
+                ErrorHandler.logWarning("Error closing writer", ex);
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 }

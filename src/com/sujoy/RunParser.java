@@ -4,8 +4,10 @@
 package com.sujoy;
 
 import com.sujoy.common.BankName;
+import com.sujoy.common.ErrorHandler;
 import com.sujoy.common.ParserHandler;
 import com.sujoy.parser.StatementParser;
+import org.htmlparser.util.ParserException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -15,6 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * @author sujoy
@@ -36,15 +39,23 @@ public class RunParser {
             try {
                 parser = handler.getParser(BankName.valueOf(e.getAttribute("name")));
                 parser.parse(e.getAttribute("filepath"), e.getAttribute("filename"), e.getAttribute("ext"));
+            } catch (IllegalArgumentException ex) {
+                ErrorHandler.logError("Invalid bank name: " + e.getAttribute("name"), ex);
+            } catch (IOException ex) {
+                ErrorHandler.logError("I/O error parsing statement for bank: " + e.getAttribute("name"), ex);
+            } catch (ParseException ex) {
+                ErrorHandler.logError("Date parsing error for bank: " + e.getAttribute("name"), ex);
+            } catch (ParserException ex) {
+                ErrorHandler.logError("HTML parsing error for bank: " + e.getAttribute("name"), ex);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                ErrorHandler.logError("Unexpected error processing bank: " + e.getAttribute("name"), ex);
             }
         }
 
     }
 
     // Parses an XML file and returns a DOM document.
-    // If validating is true, the contents is validated against the DTD
+    // If validating is true, the contents are validated against the DTD
     // specified in the file.
     public static Document parseXmlFile(String filename, boolean validating) {
         try {
@@ -58,8 +69,11 @@ public class RunParser {
                     new File(filename));
         } catch (SAXException e) {
             // A parsing error occurred; the xml input is not valid
-        } catch (ParserConfigurationException | IOException e) {
-            e.printStackTrace();
+            ErrorHandler.logError("XML parsing error in file: " + filename, e);
+        } catch (ParserConfigurationException e) {
+            ErrorHandler.logError("XML parser configuration error for file: " + filename, e);
+        } catch (IOException e) {
+            ErrorHandler.logError("I/O error reading XML file: " + filename, e);
         }
         return null;
     }

@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 /**
  * @author sujoy
  */
-public class KOTAKCurrentStmtParser implements StatementParser {
+@Deprecated public class KOTAKCurrentStmtParser implements StatementParser {
 
     /**
      * @param line
