@@ -20,6 +20,7 @@ class MSMoneyConverterTest {
     private StringWriter writer;
     
     @BeforeEach
+    @SuppressWarnings("unused")
     void setUp() {
         converter = new MSMoneyConverter();
         writer = new StringWriter();

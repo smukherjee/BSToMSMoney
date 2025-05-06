@@ -23,6 +23,7 @@ class ICICIStmtParserExcelTest {
     private Cell mockCell;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void setUp() {
         parser = new ICICIStmtParserExcel();
         mockMSMoney = mock(MSMoney.class);

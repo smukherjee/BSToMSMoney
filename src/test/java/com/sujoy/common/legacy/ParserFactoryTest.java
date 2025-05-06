@@ -1,12 +1,19 @@
 package com.sujoy.common.legacy;
 
-import com.sujoy.parser.legacy.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.sujoy.common.BankName;
+import com.sujoy.parser.legacy.AxisStmtParserExcel;
+import com.sujoy.parser.legacy.BOIStmtParserCSV;
+import com.sujoy.parser.legacy.CanaraBankStmtParserCSV;
+import com.sujoy.parser.legacy.ICICIStmtParserExcel;
+import com.sujoy.parser.legacy.SBIStmtParser;
+import com.sujoy.parser.legacy.StatementParser;
+import com.sujoy.parser.legacy.UnitedBankStmtParserExcel;
 
 /**
  * Unit tests for ParserFactory class
@@ -52,6 +59,7 @@ public class ParserFactoryTest {
     @Test
     public void testRegisterParser_shouldAllowAddingNewParser() {
         // Create a mock parser
+        @SuppressWarnings("Convert2Lambda")
         StatementParser mockParser = new StatementParser() {
             @Override
             public void parse(String path, String filename, String ext) {

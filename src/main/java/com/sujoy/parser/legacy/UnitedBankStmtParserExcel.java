@@ -53,7 +53,6 @@ public class UnitedBankStmtParserExcel implements StatementParser {
         try {
 
             FileInputStream excelFile = new FileInputStream(new File(path + File.separator + filename + "." + ext));
-            Double amt = 0.0;
             //Workbook workbook = new XSSFWorkbook(excelFile);
             Workbook workbook = new HSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
@@ -69,11 +68,8 @@ public class UnitedBankStmtParserExcel implements StatementParser {
 
                 Row currentRow = iterator.next();
 
-                Iterator<Cell> cellIterator = currentRow.iterator();
-
-                while (cellIterator.hasNext()) {
-                    Cell currentCell = cellIterator.next();
-//Transaction Date		Cheque Number		Withdrawal		Deposit	Balance	Narration
+                for (Cell currentCell : currentRow) {
+                    //Transaction Date		Cheque Number		Withdrawal		Deposit	Balance	Narration
                     // System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
                     ErrorHandler.logInfo(currentCell.getCellType() + " +++++++++ " + currentCell,null);
 
@@ -82,7 +78,7 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                             try {
                                 msMoneyFormat.setDate(Util.parse(currentCell.getStringCellValue()));
 //                                msMoneyFormat.setDate(Util.interchangeMonthDate(currentCell.getStringCellValue(), "dd/MM/yyyy"));
-                                writeToFile = true;
+writeToFile = true;
                             } catch (Exception e) {
                                 writeToFile = false;
                                 // System.out.println(currentCell.getStringCellValue() + "--- Exception Date");
@@ -104,7 +100,7 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                         case 5: //withdrawal
                             if (currentCell.getCellType() == CellType.STRING) {
                                 try {
-                                    amt = Double.valueOf(currentCell.getStringCellValue().replaceAll(",", ""));
+                                    Double amt = Double.valueOf(currentCell.getStringCellValue().replaceAll(",", ""));
                                     if (amt > 0.0) {
                                         msMoneyFormat.setTransactionAmount("-" + amt);
                                     }
@@ -116,7 +112,7 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                         case 7: // Deposit
                             if (currentCell.getCellType() == CellType.STRING) {
                                 try {
-                                    amt = Double.valueOf(currentCell.getStringCellValue().replaceAll(",", ""));
+                                    Double amt = Double.valueOf(currentCell.getStringCellValue().replaceAll(",", ""));
                                     if (amt > 0.0) {
                                         msMoneyFormat.setTransactionAmount("" + amt);
                                     }

@@ -4,6 +4,10 @@
         <!-- Console Appender -->
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <Filters>
+                <!-- Only show INFO messages, deny everything else -->
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
         </Console>
 
         <!-- File Appender for all logs -->
@@ -36,23 +40,29 @@
     <Loggers>
         <!-- Logger for com.sujoy package -->
         <Logger name="com.sujoy" level="INFO" additivity="false">
-            <AppenderRef ref="Console" />
             <AppenderRef ref="FileAppender" />
             <AppenderRef ref="ErrorAppender" />
+            <AppenderRef ref="Console">
+                <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </AppenderRef>
         </Logger>
 
-        <!-- Logger for parser package with DEBUG level -->
+        <!-- Logger for parser package with DEBUG level for file logging but INFO for console -->
         <Logger name="com.sujoy.parser" level="DEBUG" additivity="false">
-            <AppenderRef ref="Console" />
             <AppenderRef ref="FileAppender" />
             <AppenderRef ref="ErrorAppender" />
+            <AppenderRef ref="Console">
+                <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </AppenderRef>
         </Logger>
 
         <!-- Root logger -->
         <Root level="WARN">
-            <AppenderRef ref="Console" />
             <AppenderRef ref="FileAppender" />
             <AppenderRef ref="ErrorAppender" />
+            <AppenderRef ref="Console">
+                <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </AppenderRef>
         </Root>
     </Loggers>
 </Configuration>

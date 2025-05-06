@@ -86,6 +86,7 @@ public class SBIStatementProcessor implements StatementProcessor {
      * @param line The line from the statement file
      * @return A Transaction object or null if the line couldn't be processed
      */
+    @SuppressWarnings("UseSpecificCatch")
     private Transaction processLine(String line) {
         if (line == null) {
             return null;
