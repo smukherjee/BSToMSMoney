@@ -1,5 +1,8 @@
-package com.sujoy.common;
+package com.sujoy.common.handlers;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.BufferedWriter;
@@ -8,13 +11,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
-
 public class ExcelFileHandler extends BaseFileHandler {
     private FileInputStream excelFile;
     private Workbook workbook;
-    private Sheet datatypeSheet;
     private Iterator<Row> iterator;
     private BufferedWriter writer;
 
@@ -22,7 +21,7 @@ public class ExcelFileHandler extends BaseFileHandler {
         try {
             excelFile = new FileInputStream(new File(path + File.separator + filename + "." + ext));
             workbook = new HSSFWorkbook(excelFile);
-            datatypeSheet = workbook.getSheetAt(0);
+            Sheet datatypeSheet = workbook.getSheetAt(0);
             iterator = datatypeSheet.iterator();
             writer = createOutputWriter(path, filename);
             writeHeader(writer);

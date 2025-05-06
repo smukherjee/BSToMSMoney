@@ -3,45 +3,45 @@
     <Appenders>
         <!-- Console Appender -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
             <Filters>
                 <!-- Only show INFO messages, deny everything else -->
-                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </Console>
 
         <!-- File Appender for all logs -->
-        <RollingFile name="FileAppender" 
-                     fileName="logs/bstomsmoney.log" 
+        <RollingFile name="FileAppender"
+                     fileName="logs/bstomsmoney.log"
                      filePattern="logs/bstomsmoney-%d{yyyy-MM-dd}-%i.log.gz">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10 MB" />
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
             </Policies>
-            <DefaultRolloverStrategy max="10" />
+            <DefaultRolloverStrategy max="10"/>
         </RollingFile>
 
         <!-- File Appender for errors only -->
-        <RollingFile name="ErrorAppender" 
-                     fileName="logs/bstomsmoney-errors.log" 
+        <RollingFile name="ErrorAppender"
+                     fileName="logs/bstomsmoney-errors.log"
                      filePattern="logs/bstomsmoney-errors-%d{yyyy-MM-dd}-%i.log.gz">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="5 MB" />
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
             </Policies>
-            <DefaultRolloverStrategy max="10" />
+            <DefaultRolloverStrategy max="10"/>
             <!-- Only include ERROR and FATAL messages -->
-            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingFile>
     </Appenders>
 
     <Loggers>
         <!-- Logger for com.sujoy package -->
         <Logger name="com.sujoy" level="INFO" additivity="false">
-            <AppenderRef ref="FileAppender" />
-            <AppenderRef ref="ErrorAppender" />
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ErrorAppender"/>
             <AppenderRef ref="Console">
                 <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
             </AppenderRef>
@@ -49,8 +49,8 @@
 
         <!-- Logger for parser package with DEBUG level for file logging but INFO for console -->
         <Logger name="com.sujoy.parser" level="DEBUG" additivity="false">
-            <AppenderRef ref="FileAppender" />
-            <AppenderRef ref="ErrorAppender" />
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ErrorAppender"/>
             <AppenderRef ref="Console">
                 <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
             </AppenderRef>
@@ -58,8 +58,8 @@
 
         <!-- Root logger -->
         <Root level="WARN">
-            <AppenderRef ref="FileAppender" />
-            <AppenderRef ref="ErrorAppender" />
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ErrorAppender"/>
             <AppenderRef ref="Console">
                 <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
             </AppenderRef>

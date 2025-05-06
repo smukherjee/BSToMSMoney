@@ -1,4 +1,4 @@
-package com.sujoy.common;
+package com.sujoy.common.handlers;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -14,7 +14,7 @@ public class CSVFileHandler extends BaseFileHandler {
     public void openFile(String path, String filename, String ext) throws IOException {
         try {
             reader = new CSVReader(new FileReader(path + File.separator + filename
-                + ((ext.length() > 0) ? "." + ext : "")));
+                    + ((!ext.isEmpty()) ? "." + ext : "")));
             writer = createOutputWriter(path, filename);
             writeHeader(writer);
         } catch (IOException e) {
@@ -27,9 +27,11 @@ public class CSVFileHandler extends BaseFileHandler {
         return reader.readNext();
     }
 
-    public BufferedWriter getWriter() {
-        return writer;
-    }
+// --Commented out by Inspection START (5/6/2025 6:09 PM):
+//    public BufferedWriter getWriter() {
+//        return writer;
+//    }
+// --Commented out by Inspection STOP (5/6/2025 6:09 PM)
 
     public void closeResources() throws IOException {
         if (reader != null) {

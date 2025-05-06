@@ -3,9 +3,6 @@
  */
 package com.sujoy.common;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-
 /**
  * @author sujoy
  */
@@ -16,27 +13,6 @@ public class MSMoney {
     String chequeNo = "";
     String payee = "";
     String remarks = "";
-
-    /**
-     * Writes MSMoney object in below format D11-14-2008 T-30.00 N000000000896
-     * PREMARKSSSSSSS MTXN TIME 19:35:25 ^
-     *
-     * @param writer BufferedWriter to write formatted data
-     * @throws IOException if an I/O error occurs
-     */
-    public void write(BufferedWriter writer) throws IOException {
-        if (getDate() != null) {
-            StringBuilder sb = new StringBuilder(2048); // Pre-allocate buffer size
-            sb.append('D').append(getDate()).append('\n')
-              .append('T').append(getTransactionAmount()).append('\n')
-              .append('N').append(getChequeNo()).append('\n')
-              .append('P').append(getPayee()).append('\n')
-              .append('M').append(getRemarks()).append('\n')
-              .append('^').append('\n');
-              
-            writer.write(sb.toString());
-        }
-    }
 
 
     /**

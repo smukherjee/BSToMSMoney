@@ -11,13 +11,6 @@ import java.util.Objects;
  */
 public class Transaction {
 
-    /**
-     * Transaction type enumeration
-     */
-    public enum TransactionType {
-        DEBIT, CREDIT, UNKNOWN
-    }
-
     private LocalDate date;
     private BigDecimal amount;
     private String chequeNumber;
@@ -26,7 +19,6 @@ public class Transaction {
     private TransactionType type;
     private String accountNumber;
     private BigDecimal balance;
-
     /**
      * Default constructor
      */
@@ -40,10 +32,10 @@ public class Transaction {
 
     /**
      * Constructor with essential fields
-     * 
-     * @param date transaction date
+     *
+     * @param date   transaction date
      * @param amount transaction amount
-     * @param type transaction type (debit/credit)
+     * @param type   transaction type (debit/credit)
      */
     public Transaction(LocalDate date, BigDecimal amount, TransactionType type) {
         this();
@@ -55,7 +47,7 @@ public class Transaction {
     /**
      * Full constructor
      */
-    public Transaction(LocalDate date, BigDecimal amount, String chequeNumber, 
+    public Transaction(LocalDate date, BigDecimal amount, String chequeNumber,
                        String payee, String description, TransactionType type,
                        String accountNumber, BigDecimal balance) {
         this.date = date;
@@ -68,11 +60,11 @@ public class Transaction {
         this.balance = balance;
     }
 
-    // Getters and setters
-
     public LocalDate getDate() {
         return date;
     }
+
+    // Getters and setters
 
     public void setDate(LocalDate date) {
         this.date = date;
@@ -136,24 +128,26 @@ public class Transaction {
 
     /**
      * Get the sign-adjusted amount based on transaction type
+     *
      * @return positive amount for credit, negative for debit
      */
     public BigDecimal getSignedAmount() {
         if (amount == null) return BigDecimal.ZERO;
-        
-        return type == TransactionType.DEBIT 
-               ? amount.negate() 
-               : amount;
+
+        return type == TransactionType.DEBIT
+                ? amount.negate()
+                : amount;
     }
 
     /**
      * Format the date using the specified pattern
+     *
      * @param pattern date format pattern
      * @return formatted date string or empty string if date is null
      */
     public String getFormattedDate(String pattern) {
         if (date == null) return "";
-        
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         return date.format(formatter);
     }
@@ -162,14 +156,14 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        
+
         Transaction that = (Transaction) o;
         return Objects.equals(date, that.date) &&
-               Objects.equals(amount, that.amount) &&
-               Objects.equals(chequeNumber, that.chequeNumber) &&
-               Objects.equals(payee, that.payee) &&
-               Objects.equals(description, that.description) &&
-               type == that.type;
+                Objects.equals(amount, that.amount) &&
+                Objects.equals(chequeNumber, that.chequeNumber) &&
+                Objects.equals(payee, that.payee) &&
+                Objects.equals(description, that.description) &&
+                type == that.type;
     }
 
     @Override
@@ -186,5 +180,12 @@ public class Transaction {
                 ", payee='" + payee + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    /**
+     * Transaction type enumeration
+     */
+    public enum TransactionType {
+        DEBIT, CREDIT, UNKNOWN
     }
 }

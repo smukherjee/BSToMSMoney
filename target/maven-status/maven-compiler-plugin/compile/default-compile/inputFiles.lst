@@ -1,11 +1,9 @@
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\BankName.java
+C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\handlers\ExcelFileHandler.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\parser\AxisStatementProcessor.java
+C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\handlers\CSVFileHandler.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\converter\MSMoneyConverter.java
-C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\ErrorHandler.java
-C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\Util.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\model\Transaction.java
-C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\BaseFileHandler.java
-C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\ExcelFileHandler.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\converter\TransactionConverter.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\parser\SBIStatementProcessor.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\MSMoney.java
@@ -14,6 +12,7 @@ C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\RunParser.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\parser\BOIStatementProcessor.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\parser\ICICIStatementProcessor.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\parser\UnitedBankStatementProcessor.java
-C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\FileUtil.java
 C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\parser\StatementProcessor.java
-C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\CSVFileHandler.java
+C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\handlers\BaseFileHandler.java
+C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\common\handlers\ErrorHandler.java
+C:\Sujoy\Personal\BSToMSMoney\src\main\java\com\sujoy\util\Util.java
