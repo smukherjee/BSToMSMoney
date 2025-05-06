@@ -21,33 +21,20 @@ public class MSMoney {
      * Writes MSMoney object in below format D11-14-2008 T-30.00 N000000000896
      * PREMARKSSSSSSS MTXN TIME 19:35:25 ^
      *
-     * @param writer
-     * @throws IOException
+     * @param writer BufferedWriter to write formatted data
+     * @throws IOException if an I/O error occurs
      */
-//    public void write(BufferedWriter writer) throws IOException {
-//        if (getDate() != null) {
-//            writer.write('D' + getDate());
-//            writer.newLine();
-//            writer.write('T' + getTransactionAmount());
-//            writer.newLine();
-//            writer.write('N' + getChequeNo());
-//            writer.newLine();
-//            writer.write('P' + getPayee());
-//            writer.newLine();
-//            writer.write('M' + getRemarks());
-//            writer.newLine();
-//            writer.write('^');
-//            writer.newLine();
-//        }
-//    }
     public void write(BufferedWriter writer) throws IOException {
         if (getDate() != null) {
-            writer.write("D" + getDate() + "\n" +
-                    "T" + getTransactionAmount() + "\n" +
-                    "N" + getChequeNo() + "\n" +
-                    "P" + getPayee() + "\n" +
-                    "M" + getRemarks() + "\n" +
-                    "^\n");
+            StringBuilder sb = new StringBuilder(2048); // Pre-allocate buffer size
+            sb.append('D').append(getDate()).append('\n')
+              .append('T').append(getTransactionAmount()).append('\n')
+              .append('N').append(getChequeNo()).append('\n')
+              .append('P').append(getPayee()).append('\n')
+              .append('M').append(getRemarks()).append('\n')
+              .append('^').append('\n');
+              
+            writer.write(sb.toString());
         }
     }
 

@@ -2,8 +2,9 @@ package com.sujoy.common;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Centralized error handling utility class to provide consistent
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
  * @author sujoy
  */
 public class ErrorHandler {
-    private static final Logger LOGGER = Logger.getLogger(ErrorHandler.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(ErrorHandler.class);
     
     /**
      * Log an exception with a custom message at ERROR level
@@ -21,8 +22,7 @@ public class ErrorHandler {
      * @param exception The exception to log
      */
     public static void logError(String message, Throwable exception) {
-        LOGGER.log(Level.SEVERE, message, exception);
-        System.err.println(message + ": " + exception.getMessage());
+        LOGGER.error(message, exception);
     }
     
     /**
@@ -32,8 +32,16 @@ public class ErrorHandler {
      * @param exception The exception to log
      */
     public static void logWarning(String message, Throwable exception) {
-        LOGGER.log(Level.WARNING, message, exception);
-        System.out.println("WARNING: " + message + ": " + exception.getMessage());
+        LOGGER.warn(message, exception);
+    }
+    
+    /**
+     * Log a warning message without an exception
+     * 
+     * @param message Custom message describing the context of the warning
+     */
+    public static void logWarning(String message) {
+        LOGGER.warn(message);
     }
     
     /**
@@ -43,8 +51,35 @@ public class ErrorHandler {
      * @param exception The exception to log
      */
     public static void logInfo(String message, Throwable exception) {
-        LOGGER.log(Level.INFO, message, exception);
-        System.out.println("INFO: " + message + ": " + exception.getMessage());
+        LOGGER.info(message, exception);
+    }
+    
+    /**
+     * Log an info message without an exception
+     * 
+     * @param message Custom message describing the context of the info
+     */
+    public static void logInfo(String message) {
+        LOGGER.info(message);
+    }
+    
+    /**
+     * Log a message at DEBUG level
+     * 
+     * @param message Debug message
+     */
+    public static void logDebug(String message) {
+        LOGGER.debug(message);
+    }
+    
+    /**
+     * Log an exception with a custom message at DEBUG level
+     * 
+     * @param message Debug message
+     * @param exception The exception to log
+     */
+    public static void logDebug(String message, Throwable exception) {
+        LOGGER.debug(message, exception);
     }
     
     /**

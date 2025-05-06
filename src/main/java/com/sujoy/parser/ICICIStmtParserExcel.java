@@ -59,7 +59,7 @@ public class ICICIStmtParserExcel implements StatementParser {
             switch (columnIndex) {
                 case 2: // Date
                     try {
-                        msMoneyFormat.setDate(Util.interchangeMonthDate(cellValue, "MM/dd/yyyy"));
+                        msMoneyFormat.setDate(Util.interchangeMonthDate(cellValue, "MM/dd/yy"));
                     } catch (Exception e) {
 //                        System.out.println(currentCell.getStringCellValue() + "--- Exception Date");
                         ErrorHandler.logWarning(cellValue + "--- Exception Date", e);

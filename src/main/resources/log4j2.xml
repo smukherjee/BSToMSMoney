@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR">
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <!-- File Appender for all logs -->
+        <RollingFile name="FileAppender" 
+                     fileName="logs/bstomsmoney.log" 
+                     filePattern="logs/bstomsmoney-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+
+        <!-- File Appender for errors only -->
+        <RollingFile name="ErrorAppender" 
+                     fileName="logs/bstomsmoney-errors.log" 
+                     filePattern="logs/bstomsmoney-errors-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+            <!-- Only include ERROR and FATAL messages -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Logger for com.sujoy package -->
+        <Logger name="com.sujoy" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="FileAppender" />
+            <AppenderRef ref="ErrorAppender" />
+        </Logger>
+
+        <!-- Logger for parser package with DEBUG level -->
+        <Logger name="com.sujoy.parser" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="FileAppender" />
+            <AppenderRef ref="ErrorAppender" />
+        </Logger>
+
+        <!-- Root logger -->
+        <Root level="WARN">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="FileAppender" />
+            <AppenderRef ref="ErrorAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
