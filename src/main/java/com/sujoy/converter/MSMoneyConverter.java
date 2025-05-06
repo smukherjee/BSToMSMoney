@@ -13,7 +13,7 @@ import com.sujoy.model.Transaction;
  */
 public class MSMoneyConverter implements TransactionConverter {
     
-    private static final String DATE_FORMAT_PATTERN = "MM/dd/yy";
+    private static final String DATE_FORMAT_PATTERN = "MM/dd/yyyy";
     // private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
     
     /**
