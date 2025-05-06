@@ -1,11 +1,17 @@
 package com.sujoy.parser;
 
-import au.com.bytecode.opencsv.CSVReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+
+import com.sujoy.common.ErrorHandler;
 import com.sujoy.common.MSMoney;
 import com.sujoy.common.Util;
 
-import java.io.*;
-import java.text.ParseException;
+import au.com.bytecode.opencsv.CSVReader;
 
 /**
  * @author sujoy
@@ -41,7 +47,9 @@ public class CanaraBankStmtParserCSV implements StatementParser {
             }
             msMoneyFormat.write(writer);
         } catch (ArrayIndexOutOfBoundsException | IOException | ParseException e) {
-            System.out.println("Error in parsing" + e.getMessage());
+            // Commenting out System.out.println and replacing with ErrorHandler.logWarning
+            // System.out.println("Error in parsing" + e.getMessage());
+            ErrorHandler.logWarning("Error in parsing" + e.getMessage(),e);
             //Do nothing as the line is not a valid line, but has a date??
         }
     }

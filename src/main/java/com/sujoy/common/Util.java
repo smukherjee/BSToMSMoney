@@ -47,6 +47,7 @@ public class Util {
             "dd MMM yyyy", //SBI
             "dd-MMM-yy", //SBI
             "d-MMM-yy",
+            
 
     };
 
@@ -56,7 +57,8 @@ public class Util {
         SimpleDateFormat sdfInputDate = new SimpleDateFormat(format);
 
         //Date givenDate = sdfDate.parse(date);
-        System.out.println("Converted Date - " + sdfMSMoneyDate.format(sdfInputDate.parse(date)));
+        // System.out.println("Converted Date - " + sdfMSMoneyDate.format(sdfInputDate.parse(date)));
+        ErrorHandler.logInfo("Converted Date - " + sdfMSMoneyDate.format(sdfInputDate.parse(date)),null);
         return sdfMSMoneyDate.format(sdfInputDate.parse(date));
     }
 
@@ -81,18 +83,19 @@ public class Util {
                         String yearInString = String.valueOf(year);
                         finalDate = finalDate.replace("1970", yearInString);
                     }
-                    System.out.println("Converted Date --- " + finalDate);
+                    // System.out.println("Converted Date --- " + finalDate);
+                    ErrorHandler.logInfo("Converted Date --- " + finalDate,null);
                     return finalDate;
                 } catch (ParseException e) {
                     // Try next format
-                    ErrorHandler.logInfo("Failed to parse date '" + d + "' with format '" + parseFormat + "'", e);
+                    ErrorHandler.logError("Failed to parse date '" + d + "' with format '" + parseFormat + "'", e);
                     finalDate = null;
                 }
             }
         }
         if (finalDate == null) {
             String message = "Couldn't convert date " + d;
-            System.out.println(message);
+            // System.out.println(message);
             // Only throw if we've tried all formats and none worked
             if (d != null) {
                 throw new ParseException(message, 0);
@@ -125,7 +128,7 @@ public class Util {
         }
         if (!converted) {
             String message = "Couldn't convert date --- " + d;
-            System.out.println(message);
+            // System.out.println(message);
             ErrorHandler.logWarning(message, new ParseException("No matching date format found", 0));
         }
         return converted;
@@ -216,7 +219,8 @@ public static void processTransactionAmount(String cellValue, MSMoney msMoneyFor
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(isValidLine(yyyyMMdd));
+        // System.out.println(isValidLine(yyyyMMdd));
+        ErrorHandler.logInfo("Validation Result: " + isValidLine(yyyyMMdd),null);
 
 //        yyyyMMdd = "03-10-2021";
 //        parse(yyyyMMdd);

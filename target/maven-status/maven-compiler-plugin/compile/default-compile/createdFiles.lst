@@ -10,6 +10,7 @@ com\sujoy\common\ParserHandler.class
 com\sujoy\common\Util.class
 com\sujoy\common\CSVFileHandler.class
 com\sujoy\common\ParserHandler$1.class
+com\sujoy\parser\AxisStmtParserExcel$1.class
 com\sujoy\parser\AxisStmtParserExcel.class
 com\sujoy\common\MSMoney.class
 com\sujoy\parser\UnitedBankStmtParserExcel.class

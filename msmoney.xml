@@ -3,8 +3,8 @@
 <MSMONEY>
 
 <!--download as excel file -->
-<!--    <Bank name = "Axis" filename="922010040809636" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
-    <Bank name = "ICICI" filename="OpTransactionHistory02-05-2025" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>
+   <!-- <Bank name = "Axis" filename="922010040809636" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/> -->
+    <!-- <Bank name = "ICICI" filename="OpTransactionHistory02-05-2025" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/> -->
 <!--    <Bank name = "ICICI" filename="OpTransactionHistory13-07-2024(1)" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 <!--    <Bank name = "ICICI" filename="OpTransactionHistory13-07-2024(2)" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="xls"/>-->
 
@@ -20,7 +20,7 @@
 <!--    <Bank name = "CANARABANK" filename="1720847719768" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
 
 <!--    &lt;!&ndash;Download as excel and then save as csv&ndash;&gt;-->
-<!--    <Bank name="BOI" filename="TUHINA MUKHERJEE" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>-->
+   <Bank name="BOI" filename="Statement1746512962075_____ 8653" filepath="C:\Users\Sujoy.Mukherjee\Downloads" ext="csv"/>
 
 
     <!--Closed Bank Accounts-->

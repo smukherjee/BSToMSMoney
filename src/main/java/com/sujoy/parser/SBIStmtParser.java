@@ -1,11 +1,17 @@
 package com.sujoy.parser;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+
+import com.sujoy.common.ErrorHandler;
 import com.sujoy.common.FileUtil;
 import com.sujoy.common.MSMoney;
 import com.sujoy.common.Util;
-
-import java.io.*;
-import java.text.ParseException;
 
 /**
  * @author sujoy
@@ -26,11 +32,13 @@ public class SBIStmtParser implements StatementParser {
             try {
                 Util.parse(spl[0]);
                 //sdfDate.parse(spl[0]);
-                System.out.println(Util.parse(spl[0]));
+//                System.out.println(Util.parse(spl[0]));
+                ErrorHandler.logInfo("Parsed Value: " + Util.parse(spl[0]),null);
                 return Boolean.TRUE;
             } catch (Exception e) {
-                System.out.println("Date Exception " + spl[0]);
-                e.printStackTrace();
+                ErrorHandler.logWarning(spl[0] + "--- Exception Date", e);
+                // System.out.println("Date Exception " + spl[0]);
+                // e.printStackTrace();
                 return Boolean.FALSE;
             }
         }

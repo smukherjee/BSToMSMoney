@@ -50,7 +50,7 @@ public class AxisStmtParserExcel implements StatementParser {
 
         for (Cell currentCell : currentRow) {
             int columnIndex = currentCell.getColumnIndex();
-            String cellValue = currentCell.getStringCellValue().trim();
+            String cellValue = getCellValueAsString(currentCell).trim();
 
             switch (columnIndex) {
                 case 1: // Date
@@ -92,5 +92,25 @@ public class AxisStmtParserExcel implements StatementParser {
         }
         return writeToFile;
     }
+    /**
+ * Utility method to get the cell value as a String, regardless of its type.
+ *
+ * @param cell The cell to retrieve the value from.
+ * @return The cell value as a String.
+ */
+private String getCellValueAsString(Cell cell) {
+    switch (cell.getCellType()) {
+        case STRING:
+            return cell.getStringCellValue();
+        case NUMERIC:
+            return String.valueOf(cell.getNumericCellValue());
+        case BOOLEAN:
+            return String.valueOf(cell.getBooleanCellValue());
+        case FORMULA:
+            return String.valueOf(cell.getCellFormula());
+        default:
+            return "";
+    }
+}
 
 }

@@ -1,14 +1,26 @@
 package com.sujoy.parser;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Iterator;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import com.sujoy.common.ErrorHandler;
 import com.sujoy.common.FileUtil;
 import com.sujoy.common.MSMoney;
 import com.sujoy.common.Util;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
-
-import java.io.*;
-import java.text.ParseException;
-import java.util.Iterator;
 
 /**
  * @author sujoy
@@ -56,7 +68,8 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                 while (cellIterator.hasNext()) {
                     Cell currentCell = cellIterator.next();
 //Transaction Date		Cheque Number		Withdrawal		Deposit	Balance	Narration
-                    System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
+                    // System.out.println(currentCell.getCellType() + " +++++++++ " + currentCell);
+                    ErrorHandler.logInfo(currentCell.getCellType() + " +++++++++ " + currentCell,null);
 
                     switch (currentCell.getColumnIndex()) {
                         case 1: //Date
@@ -66,7 +79,8 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                                 writeToFile = true;
                             } catch (Exception e) {
                                 writeToFile = false;
-                                System.out.println(currentCell.getStringCellValue() + "--- Exception Date");
+                                // System.out.println(currentCell.getStringCellValue() + "--- Exception Date");
+                                ErrorHandler.logWarning(currentCell.getStringCellValue() + "--- Exception Date",e);
                             }
                             break;
 
@@ -108,7 +122,6 @@ public class UnitedBankStmtParserExcel implements StatementParser {
                             break;
                     }
                 }
-                System.out.println("----------------------");
                 if (writeToFile) {
                     msMoneyFormat.write(writer);
                     writeToFile = false;
@@ -116,9 +129,11 @@ public class UnitedBankStmtParserExcel implements StatementParser {
 
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            ErrorHandler.logError("Excel file not found: " + path + File.separator + filename + "." + ext, e);
+
         } catch (IOException e) {
-            e.printStackTrace();
+            ErrorHandler.logError(ext, e);
         } finally {
             FileUtil.closeReaderWriter(reader, writer);
         }
