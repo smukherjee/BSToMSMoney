@@ -1,4 +1,4 @@
-package com.sujoy.parser;
+package com.sujoy.parser.legacy;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,7 +24,11 @@ import com.sujoy.common.Util;
 
 /**
  * @author sujoy
+ * @deprecated This class is deprecated in favor of {@link UnitedBankStatementProcessor}.
+ * Use UnitedBankStatementProcessor which provides better transaction handling and follows
+ * the modern domain model approach.
  */
+@Deprecated
 public class UnitedBankStmtParserExcel implements StatementParser {
 
     /*
@@ -39,6 +43,8 @@ public class UnitedBankStmtParserExcel implements StatementParser {
         writer.newLine();
     }
 
+    @Override
+    @SuppressWarnings("UseSpecificCatch")
     public void parse(String path, String filename, String ext) throws IOException, ParseException {
 
         BufferedWriter writer = null;

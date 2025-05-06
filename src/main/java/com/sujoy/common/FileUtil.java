@@ -3,8 +3,9 @@
  */
 package com.sujoy.common;
 
-import java.io.*;
-import com.sujoy.common.ErrorHandler;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 /**
  * @author sujoy
@@ -33,6 +34,7 @@ public class FileUtil {
      * @param reader BufferedReader to close
      * @param writer BufferedWriter to close
      */
+    @SuppressWarnings("ConvertToTryWithResources")
     public static void closeReaderWriter(BufferedReader reader,
                                          BufferedWriter writer) {
         if (reader != null) {

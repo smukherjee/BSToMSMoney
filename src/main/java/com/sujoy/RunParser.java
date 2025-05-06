@@ -31,9 +31,9 @@ import com.sujoy.parser.BOIStatementProcessor;
 import com.sujoy.parser.CanaraBankStatementProcessor;
 import com.sujoy.parser.ICICIStatementProcessor;
 import com.sujoy.parser.SBIStatementProcessor;
-import com.sujoy.parser.StatementParser;
 import com.sujoy.parser.StatementProcessor;
 import com.sujoy.parser.UnitedBankStatementProcessor;
+import com.sujoy.parser.legacy.StatementParser;
 
 /**
  * Main application class that processes bank statements and converts them to MS Money format.
@@ -54,6 +54,7 @@ public class RunParser {
         PROCESSOR_MAP.put(BankName.UNITEDBANK, new UnitedBankStatementProcessor());
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     public static void main(String[] args) {
         // Create the QIF converter
         TransactionConverter converter = new MSMoneyConverter();
@@ -127,7 +128,7 @@ public class RunParser {
             throws IOException, ParseException, ParserException {
         
         ErrorHandler.logInfo("Using legacy parser for " + bankName);
-        StatementParser parser = com.sujoy.common.ParserFactory.getParser(bankName);
+        StatementParser parser = com.sujoy.common.legacy.ParserFactory.getParser(bankName);
         parser.parse(path, filename, ext);
     }
     

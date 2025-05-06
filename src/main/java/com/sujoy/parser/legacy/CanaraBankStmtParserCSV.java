@@ -1,5 +1,4 @@
-package com.sujoy.parser;
-
+package com.sujoy.parser.legacy;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -15,7 +14,11 @@ import au.com.bytecode.opencsv.CSVReader;
 
 /**
  * @author sujoy
+ * @deprecated This class is deprecated in favor of {@link CanaraBankStatementProcessor}.
+ * Use CanaraBankStatementProcessor which provides better transaction handling and follows
+ * the modern domain model approach.
  */
+@Deprecated
 public class CanaraBankStmtParserCSV implements StatementParser {
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
@@ -83,8 +86,13 @@ public class CanaraBankStmtParserCSV implements StatementParser {
             }
         } finally {
             //FileUtil.closeReaderWriter(reader, writer);
-            reader.close();
-            writer.close();
+            if (reader != null) {
+                reader.close();
+            }
+            if (writer != null) {
+                writer.close();
+            }
+
         }
     }
 

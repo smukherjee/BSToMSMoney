@@ -1,4 +1,4 @@
-package com.sujoy.parser;
+package com.sujoy.parser.legacy;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -11,7 +11,11 @@ import com.sujoy.common.Util;
 
 /**
  * @author sujoy
+ * @deprecated This class is deprecated in favor of {@link BOIStatementProcessor}.
+ * Use BOIStatementProcessor which provides better transaction handling and follows
+ * the modern domain model approach.
  */
+@Deprecated
 public class BOIStmtParserCSV implements StatementParser {
 
     // private static void writeHeader(BufferedWriter writer) throws IOException {
@@ -19,6 +23,7 @@ public class BOIStmtParserCSV implements StatementParser {
     //     writer.newLine();
     // }
 
+    @SuppressWarnings("UseSpecificCatch")
     private static boolean isValidLine(String[] line) {
 //        SimpleDateFormat sdfDate = new SimpleDateFormat("MM-dd-yyyy");
         try {

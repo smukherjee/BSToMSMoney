@@ -1,5 +1,4 @@
-package com.sujoy.parser;
-
+package com.sujoy.parser.legacy;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +14,11 @@ import com.sujoy.common.Util;
 
 /**
  * @author sujoy
+ * @deprecated This class is deprecated in favor of {@link SBIStatementProcessor}.
+ * Use SBIStatementProcessor which provides better transaction handling and follows
+ * the modern domain model approach.
  */
+@Deprecated
 public class SBIStmtParser implements StatementParser {
 
     private static void writeHeader(BufferedWriter writer) throws IOException {
@@ -23,6 +26,7 @@ public class SBIStmtParser implements StatementParser {
         writer.newLine();
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     private static boolean isValidLine(String line) {
         if (line != null && line.length() > 20) {
 //			SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MMM-yyyy");

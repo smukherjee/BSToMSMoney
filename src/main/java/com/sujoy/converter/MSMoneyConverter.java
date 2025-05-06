@@ -2,7 +2,6 @@ package com.sujoy.converter;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.sujoy.common.ErrorHandler;
@@ -14,8 +13,8 @@ import com.sujoy.model.Transaction;
  */
 public class MSMoneyConverter implements TransactionConverter {
     
-    private static final String DATE_FORMAT_PATTERN = "MM/dd/yyyy";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
+    private static final String DATE_FORMAT_PATTERN = "MM/dd/yy";
+    // private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
     
     /**
      * Writes the QIF header to the output.

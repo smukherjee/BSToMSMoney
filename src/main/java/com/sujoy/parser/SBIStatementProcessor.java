@@ -1,5 +1,4 @@
 package com.sujoy.parser;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -61,6 +60,7 @@ public class SBIStatementProcessor implements StatementProcessor {
      * @param line The line from the statement file
      * @return true if the line is valid, false otherwise
      */
+    @SuppressWarnings("UseSpecificCatch")
     private boolean isValidLine(String line) {
         if (line == null || line.length() < 20) {
             return false;

@@ -1,20 +1,19 @@
-package com.sujoy.parser;
+package com.sujoy.parser.legacy;
 
-import com.sujoy.common.MSMoney;
-import com.sujoy.common.Util;
+import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Iterator;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import com.sujoy.common.MSMoney;
+import com.sujoy.common.Util;
 
 class ICICIStmtParserExcelTest {
 

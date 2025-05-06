@@ -1,4 +1,4 @@
-package com.sujoy.parser;
+package com.sujoy.parser.legacy;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,7 +17,13 @@ import com.sujoy.common.Util;
 /**
  * Parser for Axis Bank Excel statements.
  * Implements the StatementParser interface.
+ * 
+ * @author sujoy
+ * @deprecated This class is deprecated in favor of {@link AxisStatementProcessor}.
+ * Use AxisStatementProcessor which provides better transaction handling and follows
+ * the modern domain model approach.
  */
+@Deprecated
 public class AxisStmtParserExcel implements StatementParser {
 
     @Override
@@ -45,6 +51,7 @@ public class AxisStmtParserExcel implements StatementParser {
         }
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     private boolean processRow(Row currentRow, MSMoney msMoneyFormat) {
         boolean writeToFile = false;
 

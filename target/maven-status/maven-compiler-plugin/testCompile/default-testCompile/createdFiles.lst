@@ -1,5 +1,5 @@
+com\sujoy\common\legacy\ParserFactoryTest.class
 com\sujoy\model\TransactionTest.class
-com\sujoy\parser\ICICIStmtParserExcelTest.class
+com\sujoy\common\legacy\ParserFactoryTest$1.class
 com\sujoy\converter\MSMoneyConverterTest.class
-com\sujoy\common\ParserFactoryTest$1.class
-com\sujoy\common\ParserFactoryTest.class
+com\sujoy\parser\legacy\ICICIStmtParserExcelTest.class

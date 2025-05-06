@@ -1,23 +1,8 @@
 package com.sujoy.common;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 //import java.util.Date;
 
 /**
@@ -142,61 +127,61 @@ public class Util {
      * @param ext The file extension
      * @return A map containing the reader, writer, workbook, and datatype sheet
      */
-    public static Map<String, Object> openExcelFile(String path, String filename, String ext) {
-        BufferedWriter writer = null;
-        BufferedReader reader = null;
-        Workbook workbook = null;
-        Sheet datatypeSheet = null;
-        Iterator<Row> iterator = null;
-        FileInputStream excelFile = null;
+    // public static Map<String, Object> openExcelFile(String path, String filename, String ext) {
+    //     BufferedWriter writer = null;
+    //     BufferedReader reader = null;
+    //     Workbook workbook = null;
+    //     Sheet datatypeSheet = null;
+    //     Iterator<Row> iterator = null;
+    //     FileInputStream excelFile = null;
 
-        Map<String, Object> result = new HashMap<>();
+    //     Map<String, Object> result = new HashMap<>();
 
-        try {
-            // Open the Excel file
-            File file = new File(path + File.separator + filename + "." + ext);
-            excelFile = new FileInputStream(file);
+    //     try {
+    //         // Open the Excel file
+    //         File file = new File(path + File.separator + filename + "." + ext);
+    //         excelFile = new FileInputStream(file);
 
-            // Create the workbook and get the first sheet
-            workbook = new HSSFWorkbook(excelFile);
-            datatypeSheet = workbook.getSheetAt(0);
-            iterator = datatypeSheet.iterator();
+    //         // Create the workbook and get the first sheet
+    //         workbook = new HSSFWorkbook(excelFile);
+    //         datatypeSheet = workbook.getSheetAt(0);
+    //         iterator = datatypeSheet.iterator();
 
-            // Create the output QIF file
-            File outputFile = new File(path + File.separator + "Converted" + filename + ".qif");
-            writer = new BufferedWriter(new FileWriter(outputFile));
-            writeHeader(writer);
+    //         // Create the output QIF file
+    //         File outputFile = new File(path + File.separator + "Converted" + filename + ".qif");
+    //         writer = new BufferedWriter(new FileWriter(outputFile));
+    //         writeHeader(writer);
 
-            // Store all resources in the result map
-            result.put("reader", reader);
-            result.put("writer", writer);
-            result.put("workbook", workbook);
-            result.put("datatypeSheet", datatypeSheet);
-            result.put("iterator", iterator);
+    //         // Store all resources in the result map
+    //         result.put("reader", reader);
+    //         result.put("writer", writer);
+    //         result.put("workbook", workbook);
+    //         result.put("datatypeSheet", datatypeSheet);
+    //         result.put("iterator", iterator);
 
-        } catch (FileNotFoundException e) {
-            ErrorHandler.logError("Excel file not found: " + path + File.separator + filename + "." + ext, e);
-        } catch (IOException e) {
-            ErrorHandler.logError("I/O error opening Excel file: " + path + File.separator + filename + "." + ext, e);
-        } catch (Exception e) {
-            ErrorHandler.logError("Unexpected error opening Excel file: " + path + File.separator + filename + "." + ext, e);
-        } finally {
-            // Close the input stream if there was an error
-            if (excelFile != null && result.get("workbook") == null) {
-                try {
-                    excelFile.close();
-                } catch (IOException e) {
-                    ErrorHandler.logWarning("Error closing Excel file input stream", e);
-                }
-            }
-        }
+    //     } catch (FileNotFoundException e) {
+    //         ErrorHandler.logError("Excel file not found: " + path + File.separator + filename + "." + ext, e);
+    //     } catch (IOException e) {
+    //         ErrorHandler.logError("I/O error opening Excel file: " + path + File.separator + filename + "." + ext, e);
+    //     } catch (Exception e) {
+    //         ErrorHandler.logError("Unexpected error opening Excel file: " + path + File.separator + filename + "." + ext, e);
+    //     } finally {
+    //         // Close the input stream if there was an error
+    //         if (excelFile != null && result.get("workbook") == null) {
+    //             try {
+    //                 excelFile.close();
+    //             } catch (IOException e) {
+    //                 ErrorHandler.logWarning("Error closing Excel file input stream", e);
+    //             }
+    //         }
+    //     }
 
-        return result;
-    }
-    private static void writeHeader(BufferedWriter writer) throws IOException {
-        writer.write("!Type:Bank");
-        writer.newLine();
-    }
+    //     return result;
+    // }
+    // private static void writeHeader(BufferedWriter writer) throws IOException {
+    //     writer.write("!Type:Bank");
+    //     writer.newLine();
+    // }
 
 public static void processTransactionAmount(String cellValue, MSMoney msMoneyFormat, boolean isWithdrawal) {
         if (!cellValue.isEmpty()) {

@@ -1,5 +1,4 @@
-package com.sujoy.parser;
-
+package com.sujoy.parser.legacy;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -16,7 +15,11 @@ import com.sujoy.common.Util;
 
 /**
  * @author sujoy
+ * @deprecated This class is deprecated in favor of {@link ICICIStatementProcessor}.
+ * Use ICICIStatementProcessor which provides better transaction handling and follows
+ * the modern domain model approach.
  */
+@Deprecated
 public class ICICIStmtParserExcel implements StatementParser {
 
     /*
@@ -50,6 +53,7 @@ public class ICICIStmtParserExcel implements StatementParser {
         }
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     boolean processRow(Row currentRow, MSMoney msMoneyFormat) {
 
         for (Cell currentCell : currentRow) {

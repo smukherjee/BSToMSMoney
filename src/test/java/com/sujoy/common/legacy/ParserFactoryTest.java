@@ -1,10 +1,12 @@
-package com.sujoy.common;
+package com.sujoy.common.legacy;
 
-import com.sujoy.parser.*;
+import com.sujoy.parser.legacy.*;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.sujoy.common.BankName;
 
 /**
  * Unit tests for ParserFactory class
