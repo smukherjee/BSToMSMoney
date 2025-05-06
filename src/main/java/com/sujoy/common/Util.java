@@ -2,10 +2,15 @@ package com.sujoy.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
-//import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
+ * Utility class for various date parsing and conversion operations.
+ * 
  * @author sujoy
  */
 public class Util {
@@ -13,15 +18,14 @@ public class Util {
     /**
      * change input format type to specified formats
      */
-    private static final SimpleDateFormat sdfMSMoneyDate = new SimpleDateFormat("MM/dd/yyyy");
-    private static final String[] formats = {
-//            "yyyy-MM-dd'T'HH:mm:ss'Z'",   "yyyy-MM-dd'T'HH:mm:ssZ",
-//            "yyyy-MM-dd'T'HH:mm:ss",      "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-//            "yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd HH:mm:ss",
-//            "MM/dd/yyyy HH:mm:ss",        "MM/dd/yyyy'T'HH:mm:ss.SSS'Z'",
-//            "MM/dd/yyyy'T'HH:mm:ss.SSSZ", "MM/dd/yyyy'T'HH:mm:ss.SSS",
-//            "MM/dd/yyyy'T'HH:mm:ssZ",     "MM/dd/yyyy'T'HH:mm:ss",
-//            "yyyy:MM:dd HH:mm:ss",        "yyyyMMdd",
+    private static final SimpleDateFormat MS_MONEY_DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
+    
+    // Thread-local SimpleDateFormat to avoid concurrency issues
+    private static final ThreadLocal<ConcurrentMap<String, SimpleDateFormat>> DATE_FORMAT_THREAD_LOCAL = 
+        ThreadLocal.withInitial(ConcurrentHashMap::new);
+    
+    // List of supported date formats
+    private static final List<String> SUPPORTED_DATE_FORMATS = Arrays.asList(
             "dd/MM/yyyy",
             "dd-MM-yyyy",
             "dd-MMM-yy", //Canara
@@ -31,20 +35,43 @@ public class Util {
             "dd-MMM", //DBS
             "dd MMM yyyy", //SBI
             "dd-MMM-yy", //SBI
-            "d-MMM-yy",
-            
+            "d-MMM-yy"
+    );
 
-    };
+    /**
+     * Get a thread-safe date format for the specified pattern
+     * 
+     * @param pattern The date format pattern
+     * @return A SimpleDateFormat instance
+     */
+    private static SimpleDateFormat getDateFormat(String pattern) {
+        return DATE_FORMAT_THREAD_LOCAL.get()
+                .computeIfAbsent(pattern, SimpleDateFormat::new);
+    }
 
-    public static String interchangeMonthDate(String date, String format)
-            throws ParseException {
+    /**
+     * Converts a date string from one format to MS Money format
+     * 
+     * @param date   The date string to convert
+     * @param format The format of the input date string
+     * @return The date string formatted for MS Money
+     * @throws ParseException If the date cannot be parsed
+     */
+    public static String interchangeMonthDate(String date, String format) throws ParseException {
+        if (date == null || date.trim().isEmpty()) {
+            throw new ParseException("Date string is null or empty", 0);
+        }
 
-        SimpleDateFormat sdfInputDate = new SimpleDateFormat(format);
-
-        //Date givenDate = sdfDate.parse(date);
-        // System.out.println("Converted Date - " + sdfMSMoneyDate.format(sdfInputDate.parse(date)));
-        ErrorHandler.logInfo("Converted Date - " + sdfMSMoneyDate.format(sdfInputDate.parse(date)),null);
-        return sdfMSMoneyDate.format(sdfInputDate.parse(date));
+        SimpleDateFormat sdfInputDate = getDateFormat(format);
+        
+        try {
+            String result = MS_MONEY_DATE_FORMAT.format(sdfInputDate.parse(date));
+            ErrorHandler.logInfo("Converted Date - " + result, null);
+            return result;
+        } catch (ParseException e) {
+            ErrorHandler.logWarning("Failed to convert date: " + date + " with format: " + format, e);
+            throw e;
+        }
     }
 
     /**
@@ -55,38 +82,40 @@ public class Util {
      * @throws ParseException If the date cannot be parsed with any of the supported formats
      */
     public static String parse(String d) throws ParseException {
-        SimpleDateFormat sdf;
+        if (d == null || d.trim().isEmpty()) {
+            throw new ParseException("Date string is null or empty", 0);
+        }
+        
         String finalDate = null;
-        if (d != null) {
-            for (String parseFormat : formats) {
-                sdf = new SimpleDateFormat(parseFormat);
-                try {
-                    finalDate = sdfMSMoneyDate.format(sdf.parse(d));
-                    if (sdf.parse(d).getYear() == 70) { // if the year is not passed then java instantiates it to 1970, then replace
-                        Calendar now = Calendar.getInstance();
-                        int year = now.get(Calendar.YEAR);
-                        String yearInString = String.valueOf(year);
-                        finalDate = finalDate.replace("1970", yearInString);
-                    }
-                    // System.out.println("Converted Date --- " + finalDate);
-                    ErrorHandler.logInfo("Converted Date --- " + finalDate,null);
-                    return finalDate;
-                } catch (ParseException e) {
-                    // Try next format
-                    ErrorHandler.logError("Failed to parse date '" + d + "' with format '" + parseFormat + "'", e);
-                    finalDate = null;
+        Calendar now = Calendar.getInstance();
+        int currentYear = now.get(Calendar.YEAR);
+        String currentYearStr = String.valueOf(currentYear);
+        
+        // Try each supported format until one works
+        for (String parseFormat : SUPPORTED_DATE_FORMATS) {
+            SimpleDateFormat sdf = getDateFormat(parseFormat);
+            sdf.setLenient(false); // Strict parsing
+            
+            try {
+                java.util.Date parsedDate = sdf.parse(d);
+                finalDate = MS_MONEY_DATE_FORMAT.format(parsedDate);
+                
+                // If the year is 1970 (default year), replace with current year
+                if (parsedDate.getYear() == 70) {
+                    finalDate = finalDate.replace("1970", currentYearStr);
                 }
+                
+                ErrorHandler.logInfo("Converted Date --- " + finalDate, null);
+                return finalDate;
+            } catch (ParseException e) {
+                // Try next format, only log at debug level to avoid console spam
+                ErrorHandler.logError("Failed to parse date '" + d + "' with format '" + parseFormat + "'", e);
             }
         }
-        if (finalDate == null) {
-            String message = "Couldn't convert date " + d;
-            // System.out.println(message);
-            // Only throw if we've tried all formats and none worked
-            if (d != null) {
-                throw new ParseException(message, 0);
-            }
-        }
-        return finalDate;
+        
+        // If we got here, no format worked
+        String message = "Couldn't convert date " + d;
+        throw new ParseException(message, 0);
     }
 
     /**
@@ -96,126 +125,76 @@ public class Util {
      * @return true if the string can be parsed as a date, false otherwise
      */
     public static boolean isValidLine(String d) {
-        SimpleDateFormat sdf;
-        boolean converted = false;
-        if (d != null) {
-            for (String parseFormat : formats) {
-                sdf = new SimpleDateFormat(parseFormat);
-                try {
-                    sdfMSMoneyDate.format(sdf.parse(d));
-                    converted = true;
-                    return converted;
-                } catch (ParseException e) {
-                    // Try next format
-                    ErrorHandler.logInfo("Failed to validate date '" + d + "' with format '" + parseFormat + "'", e);
-                }
+        if (d == null || d.trim().isEmpty()) {
+            return false;
+        }
+        
+        for (String parseFormat : SUPPORTED_DATE_FORMATS) {
+            SimpleDateFormat sdf = getDateFormat(parseFormat);
+            sdf.setLenient(false); // Strict parsing
+            
+            try {
+                MS_MONEY_DATE_FORMAT.format(sdf.parse(d));
+                return true;
+            } catch (ParseException e) {
+                // Try next format, logging at debug level to avoid console spam
+                ErrorHandler.logInfo("Failed to validate date '" + d + "' with format '" + parseFormat + "'", null);
             }
         }
-        if (!converted) {
-            String message = "Couldn't convert date --- " + d;
-            // System.out.println(message);
-            ErrorHandler.logWarning(message, new ParseException("No matching date format found", 0));
-        }
-        return converted;
+        
+        // If we got here, no format worked
+        String message = "Tran Date - Invalid date format: " + d;
+        ErrorHandler.logWarning(message, new ParseException("No matching date format found", 0));
+        return false;
     }
 
     /**
-     * Open an Excel file for reading and prepare a QIF file for writing
+     * Processes transaction amounts from a string value to a MSMoney object
      * 
-     * @param path The directory path
-     * @param filename The filename without extension
-     * @param ext The file extension
-     * @return A map containing the reader, writer, workbook, and datatype sheet
+     * @param cellValue The string value representing the transaction amount
+     * @param msMoneyFormat The MSMoney object to update
+     * @param isWithdrawal Whether the amount represents a withdrawal (debit)
      */
-    // public static Map<String, Object> openExcelFile(String path, String filename, String ext) {
-    //     BufferedWriter writer = null;
-    //     BufferedReader reader = null;
-    //     Workbook workbook = null;
-    //     Sheet datatypeSheet = null;
-    //     Iterator<Row> iterator = null;
-    //     FileInputStream excelFile = null;
-
-    //     Map<String, Object> result = new HashMap<>();
-
-    //     try {
-    //         // Open the Excel file
-    //         File file = new File(path + File.separator + filename + "." + ext);
-    //         excelFile = new FileInputStream(file);
-
-    //         // Create the workbook and get the first sheet
-    //         workbook = new HSSFWorkbook(excelFile);
-    //         datatypeSheet = workbook.getSheetAt(0);
-    //         iterator = datatypeSheet.iterator();
-
-    //         // Create the output QIF file
-    //         File outputFile = new File(path + File.separator + "Converted" + filename + ".qif");
-    //         writer = new BufferedWriter(new FileWriter(outputFile));
-    //         writeHeader(writer);
-
-    //         // Store all resources in the result map
-    //         result.put("reader", reader);
-    //         result.put("writer", writer);
-    //         result.put("workbook", workbook);
-    //         result.put("datatypeSheet", datatypeSheet);
-    //         result.put("iterator", iterator);
-
-    //     } catch (FileNotFoundException e) {
-    //         ErrorHandler.logError("Excel file not found: " + path + File.separator + filename + "." + ext, e);
-    //     } catch (IOException e) {
-    //         ErrorHandler.logError("I/O error opening Excel file: " + path + File.separator + filename + "." + ext, e);
-    //     } catch (Exception e) {
-    //         ErrorHandler.logError("Unexpected error opening Excel file: " + path + File.separator + filename + "." + ext, e);
-    //     } finally {
-    //         // Close the input stream if there was an error
-    //         if (excelFile != null && result.get("workbook") == null) {
-    //             try {
-    //                 excelFile.close();
-    //             } catch (IOException e) {
-    //                 ErrorHandler.logWarning("Error closing Excel file input stream", e);
-    //             }
-    //         }
-    //     }
-
-    //     return result;
-    // }
-    // private static void writeHeader(BufferedWriter writer) throws IOException {
-    //     writer.write("!Type:Bank");
-    //     writer.newLine();
-    // }
-
-public static void processTransactionAmount(String cellValue, MSMoney msMoneyFormat, boolean isWithdrawal) {
-        if (!cellValue.isEmpty()) {
-            try {
-                double amount = Double.parseDouble(cellValue);
-                if (amount > 0.0) {
-                    String transactionAmount = (isWithdrawal ? "-" : "") + amount;
-                    msMoneyFormat.setTransactionAmount(transactionAmount);
-                }
-            } catch (NumberFormatException e) {
-                ErrorHandler.logWarning("Invalid transaction amount: " + cellValue, e);
+    public static void processTransactionAmount(String cellValue, MSMoney msMoneyFormat, boolean isWithdrawal) {
+        if (cellValue == null || cellValue.isEmpty()) {
+            return;
+        }
+        
+        try {
+            // Remove any currency symbols and commas
+            String cleanedValue = cellValue.replaceAll("[^0-9.-]", "");
+            double amount = Double.parseDouble(cleanedValue);
+            
+            if (amount > 0.0) {
+                String transactionAmount = (isWithdrawal ? "-" : "") + amount;
+                msMoneyFormat.setTransactionAmount(transactionAmount);
             }
+        } catch (NumberFormatException e) {
+            ErrorHandler.logWarning("Invalid transaction amount: " + cellValue, e);
         }
     }
     
     public static void main(String[] args) {
-        String yyyyMMdd = "22-06-2022 08:19:24";
-        try {
-            parse(yyyyMMdd);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        String[] testDates = {
+            "22-06-2022 08:19:24",
+            "03-10-2021",
+            "16/06/2008",
+            "16-Jun-2008",
+            null,
+            "invalid-date"
+        };
+        
+        for (String date : testDates) {
+            try {
+                if (date != null) {
+                    ErrorHandler.logInfo("Testing date: " + date, null);
+                    String result = parse(date);
+                    ErrorHandler.logInfo("Parsed result: " + result, null);
+                    ErrorHandler.logInfo("Valid date: " + isValidLine(date), null);
+                }
+            } catch (ParseException e) {
+                ErrorHandler.logWarning("Parse exception for date: " + date, e);
+            }
         }
-        // System.out.println(isValidLine(yyyyMMdd));
-        ErrorHandler.logInfo("Validation Result: " + isValidLine(yyyyMMdd),null);
-
-//        yyyyMMdd = "03-10-2021";
-//        parse(yyyyMMdd);
-//        System.out.println(isValidLine(yyyyMMdd));
-
-//        System.out.println(interchangeMonthDate("16/06/2008", "dd/MM/yyyy"));
-//        System.out.println(interchangeMonthDate("06/16/2008", "MM/dd/yyyy"));
-//        System.out.println(interchangeMonthDate("16-Jun-2008", "dd-MMM-yyyy"));
-//        System.out.println(interchangeMonthDate("06-16-2008", "MM-dd-yyyy"));
     }
-
-
 }
