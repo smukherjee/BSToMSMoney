@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.apache.poi.ss.usermodel.Cell;
+
 /**
  * Utility class for various date parsing and conversion operations.
  * 
@@ -118,35 +120,7 @@ public class Util {
         throw new ParseException(message, 0);
     }
 
-    /**
-     * Check if a string can be parsed as a date using any of the supported formats
-     * 
-     * @param d The date string to check
-     * @return true if the string can be parsed as a date, false otherwise
-     */
-    public static boolean isValidLine(String d) {
-        if (d == null || d.trim().isEmpty()) {
-            return false;
-        }
-        
-        for (String parseFormat : SUPPORTED_DATE_FORMATS) {
-            SimpleDateFormat sdf = getDateFormat(parseFormat);
-            sdf.setLenient(false); // Strict parsing
-            
-            try {
-                MS_MONEY_DATE_FORMAT.format(sdf.parse(d));
-                return true;
-            } catch (ParseException e) {
-                // Try next format, logging at debug level to avoid console spam
-                ErrorHandler.logInfo("Failed to validate date '" + d + "' with format '" + parseFormat + "'", null);
-            }
-        }
-        
-        // If we got here, no format worked
-        String message = "Tran Date - Invalid date format: " + d;
-        ErrorHandler.logWarning(message, new ParseException("No matching date format found", 0));
-        return false;
-    }
+  
 
     /**
      * Processes transaction amounts from a string value to a MSMoney object
@@ -173,6 +147,28 @@ public class Util {
             ErrorHandler.logWarning("Invalid transaction amount: " + cellValue, e);
         }
     }
+        /**
+     * Get cell value as a string regardless of the cell type.
+     * 
+     * @param cell The cell to get the value from
+     * @return The cell value as a string
+     */
+    public static String getCellValueAsString(Cell cell) {
+        if (cell == null) return "";
+        
+        switch (cell.getCellType()) {
+            case STRING:
+                return cell.getStringCellValue().trim();
+            case NUMERIC:
+                return String.valueOf(cell.getNumericCellValue());
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case FORMULA:
+                return String.valueOf(cell.getCellFormula());
+            default:
+                return "";
+        }
+    }
     
     public static void main(String[] args) {
         String[] testDates = {
@@ -190,7 +186,6 @@ public class Util {
                     ErrorHandler.logInfo("Testing date: " + date, null);
                     String result = parse(date);
                     ErrorHandler.logInfo("Parsed result: " + result, null);
-                    ErrorHandler.logInfo("Valid date: " + isValidLine(date), null);
                 }
             } catch (ParseException e) {
                 ErrorHandler.logWarning("Parse exception for date: " + date, e);
