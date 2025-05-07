@@ -1,11 +1,9 @@
 package com.sujoy.parser;
 
-import com.sujoy.common.ErrorHandler;
-import com.sujoy.common.ExcelFileHandler;
+import com.sujoy.common.handlers.ErrorHandler;
 import com.sujoy.model.Transaction;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.IOException;
@@ -17,6 +15,8 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.sujoy.common.handlers.ExcelFileHandler;
 
 /**
  * Axis Bank statement processor implementation.

@@ -1,7 +1,7 @@
 package com.sujoy.parser;
 
-import com.sujoy.common.ErrorHandler;
-import com.sujoy.common.ExcelFileHandler;
+import com.sujoy.common.handlers.ErrorHandler;
+import com.sujoy.common.handlers.ExcelFileHandler;
 import com.sujoy.model.Transaction;
 
 import org.apache.poi.ss.usermodel.Cell;

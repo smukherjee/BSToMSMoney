@@ -10,11 +10,13 @@ com\sujoy\model\Transaction$TransactionType.class
 com\sujoy\parser\CanaraBankStatementProcessor.class
 com\sujoy\common\handlers\CSVFileHandler.class
 com\sujoy\common\MSMoney.class
+com\sujoy\parser\UnitedBankStatementProcessor$1.class
 com\sujoy\parser\AxisStatementProcessor.class
 com\sujoy\common\BankName.class
 com\sujoy\parser\UnitedBankStatementProcessor.class
 com\sujoy\common\handlers\ExcelFileHandler.class
 com\sujoy\converter\MSMoneyConverter.class
+com\sujoy\parser\AxisStatementProcessor$1.class
 com\sujoy\model\Transaction.class
 com\sujoy\converter\TransactionConverter.class
 com\sujoy\parser\StatementProcessor.class

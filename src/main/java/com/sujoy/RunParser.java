@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.sujoy.common.BankName;
-import com.sujoy.common.ErrorHandler;
+import com.sujoy.common.handlers.ErrorHandler;
 import com.sujoy.converter.MSMoneyConverter;
 import com.sujoy.converter.TransactionConverter;
 import com.sujoy.model.Transaction;
@@ -77,11 +77,12 @@ public class RunParser {
                 if (processor != null) {
                     // Use new domain model approach
                     processWithDomainModel(processor, converter, filePath, fileName, fileExt);
-                } else {
-                    // Fall back to legacy approach (should not happen since we've implemented all processors)
-                    ErrorHandler.logWarning("No statement processor found for " + bankNameStr + ", using legacy parser");
-                    processWithLegacyParser(bankName, filePath, fileName, fileExt);
                 }
+//                else {
+//                    // Fall back to legacy approach (should not happen since we've implemented all processors)
+//                    ErrorHandler.logWarning("No statement processor found for " + bankNameStr + ", using legacy parser");
+//                    processWithLegacyParser(bankName, filePath, fileName, fileExt);
+//                }
                 
                 ErrorHandler.logInfo("Successfully processed " + bankNameStr + " statement: " + fileName);
                 
@@ -113,16 +114,16 @@ public class RunParser {
         ErrorHandler.logInfo("Processed " + transactions.size() + " transactions to " + outputPath);
     }
     
-    /**
-     * Process using legacy parser (compatibility mode).
-     */
-    private static void processWithLegacyParser(BankName bankName, String path, String filename, String ext) 
-            throws IOException, ParseException, ParserException {
-        
-        ErrorHandler.logInfo("Using legacy parser for " + bankName);
-        StatementParser parser = com.sujoy.common.ParserFactory.getParser(bankName);
-        parser.parse(path, filename, ext);
-    }
+//    /**
+//     * Process using legacy parser (compatibility mode).
+//     */
+//    private static void processWithLegacyParser(BankName bankName, String path, String filename, String ext)
+//            throws IOException, ParseException, ParserException {
+//
+//        ErrorHandler.logInfo("Using legacy parser for " + bankName);
+//        StatementParser parser = com.sujoy.common.handlers.ParserFactory.getParser(bankName);
+//        parser.parse(path, filename, ext);
+//    }
     
     // Parses an XML file and returns a DOM document.
     // If validating is true, the contents are validated against the DTD
