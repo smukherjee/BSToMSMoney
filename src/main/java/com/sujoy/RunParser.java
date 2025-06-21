@@ -63,10 +63,20 @@ public class RunParser {
         for (int i = 0; i < nl.getLength(); i++) {
             Element e = (Element) nl.item(i);
             String bankNameStr = e.getAttribute("name");
-            String filePath = e.getAttribute("filepath");
+            // String filePath = e.getAttribute("filepath");
+            // Determine the Downloads folder path based on OS
+            String userHome = System.getProperty("user.home");
+            String os = System.getProperty("os.name").toLowerCase();
+            String downloadsPath;
+                if (os.contains("win")) {
+                downloadsPath = userHome + "\\Downloads";
+                } else {
+                downloadsPath = userHome + "/Downloads";
+                }
+            String filePath = downloadsPath;
             String fileName = e.getAttribute("filename");
             String fileExt = e.getAttribute("ext");
-            
+        
             try {
                 BankName bankName = BankName.valueOf(bankNameStr);
                 
@@ -89,6 +99,7 @@ public class RunParser {
                 ErrorHandler.logError("Invalid bank name: " + bankNameStr, ex);
             } catch (Exception ex) {
                 ErrorHandler.logError("Error processing bank statement: " + bankNameStr, ex);
+                // ex.printStackTrace();
             }
         }
     }
